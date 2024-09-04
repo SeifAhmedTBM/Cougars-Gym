@@ -165,8 +165,24 @@
             width: 100px;
             height: 100px;
         }
+        @page {
+            size: A3;
+            margin: 20mm;
+        }
+
+        @media print {
+            body {
+                width: auto;
+                height: auto;
+            }
+        }
 
     </style>
+    <script>
+        window.onload = function() {
+            window.print();
+        };
+    </script>
 </head>
 
 <body>
@@ -229,7 +245,7 @@
     <div class="total-box">
         <h5>Total Due</h5>
         <p>الرصيد المستحق</p>
-        <p style="color: #2f2f2f;"><span>{{ $invoice['invoice']->net_amount - $invoice['invoice']->payments->sum('amount') }}</span> ر.س.SAR</p>
+        <p style="color: #2f2f2f;"><span>{{ ($invoice['invoice']->net_amount + ($invoice['invoice']->net_amount * 0.15 )) - $invoice['invoice']->payments->sum('amount') }}</span> ر.س.SAR</p>
     </div>
 
     <!-- Invoice Details Table -->
@@ -251,7 +267,7 @@
                 <td>{{$item['title']}}</td>
                 <td>1</td>
                 <td>{{$item['pricePerUnit']}}</td>
-                <td>--</td>
+                <td>{{$item['pricePerUnit']}}</td>
                 <td>{{$item['pricePerUnit'] * 0.15}} <br><span style="font-size:12px">15%</span></td>
                 <td>{{$item['pricePerUnit'] +($item['pricePerUnit']*0.15)}}</td>
             </tr>
@@ -294,5 +310,4 @@
     </div>
 </div>
 </body>
-
 </html>
