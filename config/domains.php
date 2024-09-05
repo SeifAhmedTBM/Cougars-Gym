@@ -23,7 +23,7 @@ return [
         'settlement_invoices'           => false
     ],
     "https://cougars.thebrandmakerz.com" => [
-        "employees_schedule"            => true,
+        "employees_schedule"            => false,
         "timeline_schedule"             => true,
         "due_payment"                   => true,
         "sessions_count"                => false,
@@ -38,9 +38,9 @@ return [
         'is_reviewed_invoices'          => false,
         'trainer_services_option'       => false,
         'sports_option'                 => false,
-        'minor'                         => true,
+        'minor'                         => false,
         'short_reports'                 => false,
-        'add_to_class_in_invoice'       => true,
+        'add_to_class_in_invoice'       => false,
         'settlement_invoices'           => false,
         'transactions_date'             => true
     ],

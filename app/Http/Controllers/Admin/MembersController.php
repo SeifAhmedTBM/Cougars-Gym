@@ -381,7 +381,7 @@ class MembersController extends Controller
                 'address_details'   => $request['address_details'],
                 'whatsapp_number'   => $request['whatsapp_number'],
                 'notes'             => $request['notes'],
-                'branch_id'         => $selected_branch->id,
+                'branch_id'         => $selected_branch->id ?? $request['branch_id'],
                 'created_by_id'     => Auth()->user()->id,
                 'parent_phone'      => isset($request->minor) ? $request['parent_phone'] : null,
                 'parent_details'    => isset($request->minor) ? $request['parent_details'] : null,
@@ -411,7 +411,7 @@ class MembersController extends Controller
                 'service_fee'           => $request->membership_fee,
                 'net_amount'            => $request->membership_fee - $request->discount_amount,
                 'membership_id'         => $membership->id,
-                'branch_id'             => $selected_branch->id,
+                'branch_id'             => $selected_branch->id ?? $request['branch_id'],
                 'sales_by_id'           => $request->sales_by_id,
                 'status'                => ($request->membership_fee - $request->discount_amount) == $request->received_amount ? 'fullpayment' : 'partial',
                 'created_by_id'         => Auth()->user()->id,
@@ -519,7 +519,7 @@ class MembersController extends Controller
 
             DB::commit();
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            dd($e->getMessage(),$e);
             $this->something_wrong();
             return back();
         }
