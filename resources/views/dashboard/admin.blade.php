@@ -20,7 +20,7 @@
                     class="text-decoration-none text-white">
                     <div class="card">
                         <div class="card-body bg-primary text-white text-center">
-                            <h5 class="fs-4 fw-semibold">{{ number_format($daily_income) }} EGP</h5>
+                            <h5 class="fs-4 fw-semibold">{{ number_format($daily_income) }} SAR</h5>
                             <h5><i class="fa fa-money"></i>
                                 {{ trans('global.daily_income') }}</h5>
                         </div>
@@ -34,7 +34,7 @@
                     class="text-decoration-none text-white">
                     <div class="card">
                         <div class="card-body bg-danger text-white text-center">
-                            <h5 class="fs-4 fw-semibold">{{ $daily_outcome }} EGP</h5>
+                            <h5 class="fs-4 fw-semibold">{{ $daily_outcome }} SAR</h5>
                             <h5><i class="fa fa-money"></i>
                                 {{ trans('global.daily_outcome') }}</h5>
                         </div>
@@ -46,7 +46,7 @@
             <div class="col-sm-6 col-lg-4">
                 <div class="card ">
                     <div class="card-body bg-success text-white text-center">
-                        <h5 class="fs-4 fw-semibold">{{ $daily_net }} EGP</h5>
+                        <h5 class="fs-4 fw-semibold">{{ $daily_net }} SAR</h5>
                         <h5><i class="fa fa-money"></i>
                             {{ trans('global.daily_total') }}</h5>
                     </div>
@@ -61,7 +61,7 @@
             <div class="col-sm-6 col-lg-4">
                 <div class="card ">
                     <div class="card-body bg-primary text-white text-center">
-                        <h5 class="fs-4 fw-semibold">{{ number_format($monthly_income) }} EGP</h5>
+                        <h5 class="fs-4 fw-semibold">{{ number_format($monthly_income) }} SAR</h5>
                         <h5><i class="fa fa-dollar"></i>
                             {{ trans('global.monthly_income') }} </h5>
                     </div>
@@ -72,7 +72,7 @@
             <div class="col-sm-6 col-lg-4">
                 <div class="card ">
                     <div class="card-body bg-danger text-white text-center">
-                        <h5 class="fs-4 fw-semibold">{{ number_format($monthly_outcome) }} EGP</h5>
+                        <h5 class="fs-4 fw-semibold">{{ number_format($monthly_outcome) }} SAR</h5>
                         <h5><i class="fa fa-dollar"></i>
                             {{ trans('global.monthly_outcome') }}</h5>
                     </div>
@@ -83,7 +83,7 @@
             <div class="col-sm-6 col-lg-4">
                 <div class="card ">
                     <div class="card-body bg-success text-white text-center">
-                        <h5 class="fs-4 fw-semibold">{{ number_format($monthly_net) }} EGP</h5>
+                        <h5 class="fs-4 fw-semibold">{{ number_format($monthly_net) }} SAR</h5>
                         <h5><i class="fa fa-dollar"></i>
                             {{ trans('global.monthly_total') }}</h5>
                     </div>
@@ -102,7 +102,7 @@
                 <div class="card ">
                     <div class="card-body  text-center">
                         <h5 class="fs-4 fw-semibold">
-                            {{ number_format($total_targets) }} EGP
+                            {{ number_format($total_targets) }} SAR
                         </h5>
                         {{ trans('global.sales_target') }}</h5>
                     </div>
@@ -114,7 +114,7 @@
                 <div class="card ">
                     <div class="card-body  text-center">
                         <h5 class="fs-4 fw-semibold">
-                            {{ number_format($monthly_income) }} EGP ( {{ ( round(($monthly_income / $total_targets ) * 100, 2)) }} % ) 
+                            {{ number_format($monthly_income) }} SAR ( {{ ( round(($monthly_income / $total_targets ) * 100, 2)) }} % ) 
                         </h5>
                         {{ trans('global.sales_achievements') }}</h5>
                     </div>
@@ -126,7 +126,7 @@
                 <div class="card ">
                     <div class="card-body  text-center">
                         <h5 class="fs-4 fw-semibold">
-                            {{ number_format($total_targets - $monthly_income) }} EGP ( {{ ( round((($total_targets - $monthly_income) / $total_targets ) * 100, 2))  }} % )
+                            {{ number_format($total_targets - $monthly_income) }} SAR ( {{ ( round((($total_targets - $monthly_income) / $total_targets ) * 100, 2))  }} % )
                         </h5>
                         {{ trans('global.rest') }}</h5>
                     </div>

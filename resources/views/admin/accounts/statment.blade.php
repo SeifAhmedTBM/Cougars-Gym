@@ -5,7 +5,7 @@
         <div class="card ">
             <div class="card-body">
                 <h4>{{ trans('cruds.account.fields.opening_balance') }}</h4>
-                <h4 class="fs-4 fw-semibold">{{ $account->opening_balance }} EGP</h4>
+                <h4 class="fs-4 fw-semibold">{{ $account->opening_balance }} SAR</h4>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
             <div class="card-body ">
                 <div>
                     <h4>{{ trans('cruds.account.fields.balance') }}</h4>
-                    <h4 class="fs-4 fw-semibold">{{ $account->balance }} EGP</h4>
+                    <h4 class="fs-4 fw-semibold">{{ $account->balance }} SAR</h4>
                 </div>
             </div>
         </div>

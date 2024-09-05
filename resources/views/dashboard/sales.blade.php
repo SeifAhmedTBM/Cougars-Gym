@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body bg-success text-white text-center">
                         <div>
-                            <h5 class="fs-4 fw-semibold">{{ number_format($target) . ' EGP' }}</h5>
+                            <h5 class="fs-4 fw-semibold">{{ number_format($target) . ' SAR' }}</h5>
                             <h5> {{ trans('global.target') }}</h5>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                         <div>
                             <a href="{{ route('admin.reports.sales-report.view', Auth::user()->id) }}"
                                 style="color:white;">
-                                <h5 class="fs-4 fw-semibold"> {{ number_format($achieved) . ' EGP' }}
+                                <h5 class="fs-4 fw-semibold"> {{ number_format($achieved) . ' SAR' }}
                                     ({{ $achieved_per }}%)
                                 </h5>
                             </a>
@@ -36,7 +36,7 @@
                 <div class="card">
                     <div class="card-body bg-warning text-white text-center">
                         <div>
-                            <h5 class="fs-4 fw-semibold">{{ $pendingTarget . ' EGP' ?? 0 }}</h5>
+                            <h5 class="fs-4 fw-semibold">{{ $pendingTarget . ' SAR' ?? 0 }}</h5>
                             <h5> {{ trans('global.pending') }}</h5>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                 <div class="card">
                     <div class="card-body bg-success text-white text-center">
                         <div>
-                            <h5 class="fs-4 fw-semibold">{{ number_format($sales_commission) ?? 0 }} EGP
+                            <h5 class="fs-4 fw-semibold">{{ number_format($sales_commission) ?? 0 }} SAR
                                 ({{ $sales_commission_per ?? 0 }}%)</h5>
                             <h5> {{ trans('global.commission') }}</h5>
                         </div>

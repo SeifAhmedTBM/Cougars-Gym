@@ -27,19 +27,19 @@
                                         <tr>
                                             <td class="border-0 font-weight-bold">{{ trans('global.target_amount') }}</td>
                                             <td class="border-0 font-weight-bold text-danger">
-                                                {{ $trainer->employee != NULL ? number_format($trainer->employee->target_amount) : 0 }} EGP</td>
+                                                {{ $trainer->employee != NULL ? number_format($trainer->employee->target_amount) : 0 }} SAR</td>
                                         </tr>
                                         <tr>
                                             <td class="border-0 font-weight-bold">
                                                 {{ trans('global.this_month_collected') }}</td>
                                             <td class="border-0 font-weight-bold text-success">
-                                                {{ number_format($total) }} EGP</td>
+                                                {{ number_format($total) }} SAR</td>
                                         </tr>
                                         <tr>
                                             <td class="border-0 font-weight-bold">
                                                 {{ trans('global.previous_month_collected') }}</td>
                                             <td class="border-0 font-weight-bold text-success">
-                                                {{ number_format($pre_total) }} EGP</td>
+                                                {{ number_format($pre_total) }} SAR</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -60,20 +60,20 @@
                                             <td class="border-0 font-weight-bold">
                                                 {{ trans('global.this_month_commission') }}</td>
                                             <td class="border-0 font-weight-bold text-success">
-                                                {{ number_format(floatVal($commission['commission'])) }} EGP</td>
+                                                {{ number_format(floatVal($commission['commission'])) }} SAR</td>
                                         </tr>
                                         <tr>
                                             <td class="border-0 font-weight-bold">
                                                 {{ trans('global.previous_month_commissions') }}</td>
                                             <td class="border-0 font-weight-bold text-success">
-                                                {{ number_format(floatVal($previous_months_commissions)) . ' EGP' }}</td>
+                                                {{ number_format(floatVal($previous_months_commissions)) . ' SAR' }}</td>
                                         </tr>
                                         <tr>
                                             <td class="border-0 font-weight-bold">{{ trans('global.total_commissions') }}
                                             </td>
                                             <td class="border-0 font-weight-bold text-success">
                                                 {{ gettype($commission['commission']) == 'integer' || gettype($commission['commission']) == 'double'? round($commission['commission']) + $previous_months_commissions: '0' }}
-                                                EGP</td>
+                                                SAR</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -112,11 +112,11 @@
                                             href="{{ route('admin.invoices.show', $report['member']['invoice_id']) }}">
                                             #{{ $report['member']['invoice_number'] }}
                                         </a>
-                                        ({{ $report['member']['membership_cost'] }} EGP)
+                                        ({{ $report['member']['membership_cost'] }} SAR)
                                     </td>
-                                    <td>{{ number_format($report['member']['session_cost']) }} EGP</td>
+                                    <td>{{ number_format($report['member']['session_cost']) }} SAR</td>
                                     <td>{{ number_format($report['member']['attendance_count']) }}</td>
-                                    <td>{{ number_format($report['member']['sessions_total_cost']) }} EGP</td>
+                                    <td>{{ number_format($report['member']['sessions_total_cost']) }} SAR</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -128,7 +128,7 @@
                             <tr class="text-center">
                                 <td colspan="7"></td>
                                 <td>{{ $total_attendance }}</td>
-                                <td class="bg-secondary font-weight-bold">{{ number_format(floatVal($total)) }} EGP</td>
+                                <td class="bg-secondary font-weight-bold">{{ number_format(floatVal($total)) }} SAR</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -179,11 +179,11 @@
                                             href="{{ route('admin.invoices.show', $pre_report['member']['invoice_id']) }}">
                                             #{{ $pre_report['member']['invoice_number'] }}
                                         </a>
-                                        ({{ number_format($pre_report['member']['membership_cost']) }} EGP)
+                                        ({{ number_format($pre_report['member']['membership_cost']) }} SAR)
                                     </td>
-                                    <td>{{ number_format($pre_report['member']['session_cost']) }} EGP</td>
+                                    <td>{{ number_format($pre_report['member']['session_cost']) }} SAR</td>
                                     <td>{{ $pre_report['member']['attendance_count'] }}</td>
-                                    <td>{{ number_format($pre_report['member']['sessions_total_cost']) }} EGP</td>
+                                    <td>{{ number_format($pre_report['member']['sessions_total_cost']) }} SAR</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -195,7 +195,7 @@
                             <tr class="text-center">
                                 <td colspan="8"></td>
                                 <td>{{ $pre_total_attendance }}</td>
-                                <td class="bg-secondary font-weight-bold">{{ number_format(floatVal($pre_total)) }} EGP
+                                <td class="bg-secondary font-weight-bold">{{ number_format(floatVal($pre_total)) }} SAR
                                 </td>
                             </tr>
                         </tfoot>

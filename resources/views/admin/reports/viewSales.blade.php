@@ -23,7 +23,7 @@
         <div class="col-sm-6 col-lg-4">
             <div class="card ">
                 <div class="card-body  text-center">
-                    <h5 class="fs-4 fw-semibold">{{  number_format($sale->employee->target_amount) }} EGP</h5>
+                    <h5 class="fs-4 fw-semibold">{{  number_format($sale->employee->target_amount) }} SAR</h5>
                     {{ trans('global.target') }}
                 </div>
             </div>
@@ -32,7 +32,7 @@
         <div class="col-sm-6 col-lg-4">
             <div class="card ">
                 <div class="card-body text-center">
-                    <h5 class="fs-4 fw-semibold">{{ number_format($sale->payments->sum('amount')) ?? 0 }} EGP ({{ $sale->payments->count() }})</h5>
+                    <h5 class="fs-4 fw-semibold">{{ number_format($sale->payments->sum('amount')) ?? 0 }} SAR ({{ $sale->payments->count() }})</h5>
                     {{ trans('cruds.payment.title') }}
                 </div>
             </div>
@@ -74,7 +74,7 @@
                                     $sales_sales_tier_amount = ($sales_payments * $sale->sales_tier->sales_tier->sales_tiers_ranges()->where('range_from', '<=', $achieved)->orderBy('range_from','desc')->first()->commission) / 100;
                                 }
                             @endphp
-                            {{ $sales_payments ? $sales_sales_tier_amount : 0 }} EGP
+                            {{ $sales_payments ? $sales_sales_tier_amount : 0 }} SAR
                             @else
                                 {{ trans('global.there_is_no_sales_tier') }}
                             @endisset
@@ -151,7 +151,7 @@
                             {{-- {{ trans('cruds.membership.title_singular') }} --}}
                         </div>
                         <div class="col-md-6">
-                            {{-- {{ trans('global.total').'  '.trans('global.amount') }} : {{ number_format($serviceReport->sum('payments')) .' EGP' }} --}}
+                            {{-- {{ trans('global.total').'  '.trans('global.amount') }} : {{ number_format($serviceReport->sum('payments')) .' SAR' }} --}}
                             {{-- {{ trans('global.amount') }} --}}
                         </div>
                     </div>

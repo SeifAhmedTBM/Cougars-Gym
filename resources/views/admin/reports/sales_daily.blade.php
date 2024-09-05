@@ -101,7 +101,7 @@
             <div class="card">
                 <div class="card-header">
                     <strong>{{ $key }} - {{ trans('global.income') }} : <span
-                            class="text-white">{{ number_format($payment->sum('amount')) }} EGP
+                            class="text-white">{{ number_format($payment->sum('amount')) }} SAR
                             ({{ $payment->count() . ' Payment' }})
                         </span> </strong>
                 </div>
@@ -168,7 +168,7 @@
             <div class="card">
                 <div class="card-header bg-danger">
                     <strong>
-                        {{ $key }} - {{ trans('global.outcome') }} : <span>{{ number_format($refund->sum('amount')) }} EGP ({{ $refund->count() . ' Refund' }})</span> 
+                        {{ $key }} - {{ trans('global.outcome') }} : <span>{{ number_format($refund->sum('amount')) }} SAR ({{ $refund->count() . ' Refund' }})</span> 
                     </strong>
                 </div>
                 <div class="card-body table-responsive">

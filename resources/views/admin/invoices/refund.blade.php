@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <div class="alert alert-danger text-center">
-                <h4>{{ trans('cruds.invoice.fields.max_refund') }} <strong>{{ $invoice->payments_sum_amount }} EGP</strong></h4>
+                <h4>{{ trans('cruds.invoice.fields.max_refund') }} <strong>{{ $invoice->payments_sum_amount }} SAR</strong></h4>
             </div>
         </div>
         <form method="POST" action="{{ route("admin.invoice.storeRefund",$invoice->id) }}" enctype="multipart/form-data">

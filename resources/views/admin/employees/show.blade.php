@@ -182,7 +182,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            {{ $employee->salary }} <b>EGP</b>
+                                            {{ $employee->salary }} <b>SAR</b>
                                         </div>
                                     </div>
 

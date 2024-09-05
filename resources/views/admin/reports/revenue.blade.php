@@ -77,7 +77,7 @@
                                     'session'   => $rep['session_id'],
                                     'date'      => request('month') != NULL ? request('month') : date('Y-m')
                                 ]) }}">
-                                    {{ round($rep['revenue']) . ' EGP' }}
+                                    {{ round($rep['revenue']) . ' SAR' }}
                                 </a>
                             </td>
                             <td>

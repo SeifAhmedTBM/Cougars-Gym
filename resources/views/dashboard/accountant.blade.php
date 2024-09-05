@@ -43,7 +43,7 @@
     <div class="col-sm-6 col-lg-4">
         <div class="card ">
             <div class="card-body bg-primary text-white text-center">
-                <h5 class="fs-4 fw-semibold">{{ $monthly_income }} EGP </h5>
+                <h5 class="fs-4 fw-semibold">{{ $monthly_income }} SAR </h5>
                 <h5><i class="fa fa-dollar"></i>
                     {{ trans('global.monthly_income') }} </h5>
             </div>

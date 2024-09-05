@@ -52,7 +52,7 @@
                                     </span> : {{ $attendance->membership->service_pricelist->name }} <br>
                                     <span class="text-danger font-weight-bold">
                                         {{ trans('cruds.invoice.fields.service_fee') }}    
-                                    </span> : {{ $attendance->membership->service_pricelist->amount . ' EGP' }}
+                                    </span> : {{ $attendance->membership->service_pricelist->amount . ' SAR' }}
                                 </td>
                                 <td>
                                     @if ($attendance->membership->trainer_id != NULL)

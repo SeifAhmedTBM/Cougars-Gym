@@ -40,9 +40,9 @@
                             <tr>
                                 <td>{{ $freelancers->name }}</td>
                                 <td>{{ $freelancers->memberships_count }}</td>
-                                <td>{{ number_format($freelancer->employee->target_amount ?? 0) }} EGP</td>
+                                <td>{{ number_format($freelancer->employee->target_amount ?? 0) }} SAR</td>
                                 <td>
-                                    {{ number_format($freelancer->payments->sum('amount')) ?? 0 }} EGP ({{ $freelancer->payments->count() }})
+                                    {{ number_format($freelancer->payments->sum('amount')) ?? 0 }} SAR ({{ $freelancer->payments->count() }})
                                 </td>
                                 <td>
                                     @isset($freelancer->payments)
@@ -65,7 +65,7 @@
                                                     $freelancer_sales_tier_commission = ($freelancer->sales_tier->sales_tier->sales_tiers_ranges()->where('range_from', '<=', $achieved)->orderBy('range_from','desc')->first()->commission ?? 0);
                                                 }
                                             @endphp
-                                            {{ $freelancer_payments ? $freelancer_sales_tier_commission : 0 }} EGP
+                                            {{ $freelancer_payments ? $freelancer_sales_tier_commission : 0 }} SAR
                                         @else
                                             {{ trans('global.there_is_no_sales_tier') }}
                                         @endisset

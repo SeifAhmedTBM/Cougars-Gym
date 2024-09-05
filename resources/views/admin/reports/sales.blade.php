@@ -65,9 +65,9 @@
                                 <td>{{ $sale->name }}</td>
                                 <td>{{ $sale->employee->branch->name ?? '-' }}</td>
                                 <td>{{ $sale->memberships_count }}</td>
-                                <td>{{ number_format($sale->employee->target_amount ?? 0) }} EGP</td>
+                                <td>{{ number_format($sale->employee->target_amount ?? 0) }} SAR</td>
                                 <td>
-                                    {{ number_format($sale->payments->sum('amount')) ?? 0 }} EGP ({{ $sale->payments->count() }})
+                                    {{ number_format($sale->payments->sum('amount')) ?? 0 }} SAR ({{ $sale->payments->count() }})
                                 </td>
                                 <td>
                                     @if(isset($sale->payments) && $sale->employee->target_amount > 0)
@@ -92,7 +92,7 @@
                                                 $sales_sales_tier_amount = ($sales_payments * $sale->sales_tier->sales_tier->sales_tiers_ranges()->where('range_from', '<=', $achieved)->orderBy('range_from','desc')->first()->commission) / 100;
                                             }
                                         @endphp
-                                        {{ $sales_payments ? $sales_sales_tier_amount : 0 }} EGP
+                                        {{ $sales_payments ? $sales_sales_tier_amount : 0 }} SAR
                                         @else
                                             {{ trans('global.there_is_no_sales_tier') }}
                                         @endisset

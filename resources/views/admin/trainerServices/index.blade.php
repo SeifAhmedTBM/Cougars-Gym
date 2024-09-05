@@ -29,7 +29,7 @@
                             <td>{{ $trainerService->trainer->name }}</td>
                             <td>{{ $trainerService->service->name }}</td>
                             <td>{{ App\Models\TrainerService::COMMISSION_TYPE[$trainerService->commission_type] }}</td>
-                            <td>{{ $trainerService->commission . ' ' . ($trainerService->commission_type == 'percentage' ? '%' : 'EGP') }}</td>
+                            <td>{{ $trainerService->commission . ' ' . ($trainerService->commission_type == 'percentage' ? '%' : 'SAR') }}</td>
                             <td>
                                 @can('trainer_services_delete')
                                 <button type="button" data-toggle="modal" data-target="#deleteModal" onclick="deleteModel(this)" data-trainer-service="{{ $trainerService->id }}" class="btn btn-danger btn-sm">

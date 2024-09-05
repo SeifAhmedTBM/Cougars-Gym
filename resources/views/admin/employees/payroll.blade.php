@@ -151,32 +151,32 @@
                             </td>
                             <td>{{ $payroll->employee->branch->name ?? '-' }}</td>
                             <td>
-                                {{ number_format($payroll->basic_salary) . ' EGP' }}
+                                {{ number_format($payroll->basic_salary) . ' SAR' }}
                             </td>
                             <td>
-                                {{ number_format($payroll->bonus) . ' EGP' }}
+                                {{ number_format($payroll->bonus) . ' SAR' }}
                             </td>
                             <td>
-                                {{ number_format($payroll->deduction) . ' EGP' }}
+                                {{ number_format($payroll->deduction) . ' SAR' }}
                             </td>
                             <td>
-                                {{ number_format($payroll->loans) . ' EGP' }}
+                                {{ number_format($payroll->loans) . ' SAR' }}
                             </td>
                             <td>
                                 <a href="{{ route('admin.payroll.fixedComission', $payroll->id) }}" class="btn btn-sm btn-primary">
-                                {{ number_format($payroll->fixed_comissions) . ' EGP' }}
+                                {{ number_format($payroll->fixed_comissions) . ' SAR' }}
                                 </a>
                             </td>
                             <td>
                                 <a href="{{ route('admin.payroll.percentageComission', $payroll->id) }}" class="btn btn-sm btn-primary">
-                                    {{ number_format($payroll->percentage_comissions) . ' EGP' }}
+                                    {{ number_format($payroll->percentage_comissions) . ' SAR' }}
                                 </a>
                             </td>
                             <td>
-                                {{ number_format($payroll->fixed_comissions+$payroll->percentage_comissions) . ' EGP' }}
+                                {{ number_format($payroll->fixed_comissions+$payroll->percentage_comissions) . ' SAR' }}
                             </td>
                             <td>
-                                {{ number_format($payroll->net_salary) . ' EGP' }}
+                                {{ number_format($payroll->net_salary) . ' SAR' }}
                             </td>
                             <td>
                                 {!! $payroll->status == 'confirmed' ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>' !!}

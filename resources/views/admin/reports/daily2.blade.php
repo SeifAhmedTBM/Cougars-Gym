@@ -41,7 +41,7 @@
                 <div class="card mb-4">
                     <div class="card-body text-center text-white bg-primary">
                         <div>
-                            <h3>{{ number_format($total_income) }} EGP<span class="fs-6 fw-normal"></h3>
+                            <h3>{{ number_format($total_income) }} SAR<span class="fs-6 fw-normal"></h3>
                             <div>{{ trans('global.total_income') }}</div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                 <div class="card mb-4 ">
                     <div class="card-body text-center text-white bg-danger">
                         <div>
-                            <h3>{{ number_format($total_outcome) }} EGP<span class="fs-6 fw-normal"></h3>
+                            <h3>{{ number_format($total_outcome) }} SAR<span class="fs-6 fw-normal"></h3>
                             <div>{{ trans('global.total_outcome') }}</div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                 <div class="card mb-4 text-center text-white bg-success">
                     <div class="card-body">
                         <div>
-                            <h3>{{ number_format($net_income) }} EGP<span class="fs-6 fw-normal"></h3>
+                            <h3>{{ number_format($net_income) }} SAR<span class="fs-6 fw-normal"></h3>
                             <div>{{ trans('global.net_income') }}</div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                 <div class="card mb-4">
                     <div class="card-body text-center text-white bg-info">
                         <div>
-                            <h3>{{ $renewals_payments_count }} ({{ number_format($renewals_payments).' EGP' }}) <span class="fs-6 fw-normal"></h3>
+                            <h3>{{ $renewals_payments_count }} ({{ number_format($renewals_payments).' SAR' }}) <span class="fs-6 fw-normal"></h3>
                             <div>{{ trans('cruds.membership.fields.renew') }}</div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                 <div class="card mb-4 ">
                     <div class="card-body text-center text-white bg-info">
                         <div>
-                            <h3>{{ $new_payments_count }} ({{ number_format($new_payments).' EGP' }})  <span class="fs-6 fw-normal"></h3>
+                            <h3>{{ $new_payments_count }} ({{ number_format($new_payments).' SAR' }})  <span class="fs-6 fw-normal"></h3>
                             <div>New Members</div>
                         </div>
                     </div>

@@ -31,7 +31,7 @@
             <div class="card-body bg-primary text-white text-center">
                 <div>
                     <h5 class="fs-4 fw-semibold">
-                        {{ number_format($payments->sum('amount')) .' EGP' }}</h5>
+                        {{ number_format($payments->sum('amount')) .' SAR' }}</h5>
                     <h5><i class="fas fa-wallet"></i> {{ trans('payments') }}</h5>
                 </div>
             </div>

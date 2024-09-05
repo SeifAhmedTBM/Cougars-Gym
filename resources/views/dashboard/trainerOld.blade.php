@@ -33,7 +33,7 @@
                 <div class="card-body bg-success text-white text-center">
                     <div>
                         <h5 class="fs-4 fw-semibold">
-                            {{ number_format($payments) .' EGP' }}</h5>
+                            {{ number_format($payments) .' SAR' }}</h5>
                         <h5><i class="fas fa-wallet"></i> {{ trans('payments') }}</h5>
                     </div>
                 </div>
@@ -44,8 +44,8 @@
         <div class="card">
             <div class="card-body bg-success text-white text-center">
                 <div>
-                    <h5 class="fs-4 fw-semibold">{{ $payments * ($commission / 100).' EGP' .' ( '.$commission.' % ) ' }}</h5>
-                    {{-- <h5 class="fs-4 fw-semibold">{{ $commission_value * ($commission / 100).' EGP' .' ( '.$commission.' % ) ' }}</h5> --}}
+                    <h5 class="fs-4 fw-semibold">{{ $payments * ($commission / 100).' SAR' .' ( '.$commission.' % ) ' }}</h5>
+                    {{-- <h5 class="fs-4 fw-semibold">{{ $commission_value * ($commission / 100).' SAR' .' ( '.$commission.' % ) ' }}</h5> --}}
                     <h5>{{ trans('global.commission') }}</h5>
                 </div>
             </div>
