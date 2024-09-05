@@ -381,7 +381,7 @@
     @if (config('domains')[config('app.url')]['national_id'] == true)
         <script>
             // $('#national').on('keyup', function() {
-            //     if ($('#national').val().length == 14) {
+            //     if ($('#national').val().length >= 6) {
             //         $('#national').removeClass('is-invalid').addClass('is-valid');
             //     } else {
             //         $('#national').removeClass('is-valid').addClass('is-invalid');
@@ -389,7 +389,7 @@
             // })
 
             $('#phone').on('keyup', function() {
-                if ($('#phone').val().length == 11) {
+                if ($('#phone').val().length == 10) {
                     $('#phone').removeClass('is-invalid').addClass('is-valid');
                 } else {
                     $('#phone').removeClass('is-valid').addClass('is-invalid');
