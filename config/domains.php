@@ -23,10 +23,10 @@ return [
         'settlement_invoices'           => false
     ],
     "https://cougars.thebrandmakerz.com" => [
-        "employees_schedule"            => false,
+        "employees_schedule"            => true,
         "timeline_schedule"             => true,
         "due_payment"                   => true,
-        "sessions_count"                => false,
+        "sessions_count"                => true,
         "national_id"                   => false,
         "email"                         => false,
         "vat"                           => false,
@@ -37,11 +37,12 @@ return [
         'member_code_enabled'           => false,
         'is_reviewed_invoices'          => false,
         'trainer_services_option'       => false,
-        'sports_option'                 => false,
-        'minor'                         => false,
+        'sports_option'                 => true,
+        'minor'                         => true,
         'short_reports'                 => false,
-        'add_to_class_in_invoice'       => false,
-        'settlement_invoices'           => false
+        'add_to_class_in_invoice'       => true,
+        'settlement_invoices'           => false,
+        'transactions_date'             => true
     ],
     "http://localhost/gymapp/public" => [
         "employees_schedule"            => true,
