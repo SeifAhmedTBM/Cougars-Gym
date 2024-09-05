@@ -79,9 +79,9 @@
                                @foreach ($months as $index => $month)
                                    <tr>
                                        <td>{{ date('F', mktime(0, 0, 0, $index, 1)) }}</td>
-                                       <td>{{ number_format($month['total_income']) }} EGP</td>
-                                       <td>{{ number_format($month['total_outcome']) }} EGP</td>
-                                       <td>{{ number_format($month['net_income']) }} EGP</td>                                       
+                                       <td>{{ number_format($month['total_income']) }} SAR</td>
+                                       <td>{{ number_format($month['total_outcome']) }} SAR</td>
+                                       <td>{{ number_format($month['net_income']) }} SAR</td>                                       
                                    </tr>
                                @endforeach
                             </tbody>

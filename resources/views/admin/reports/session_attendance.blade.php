@@ -40,10 +40,10 @@
                         <td>{{ $no_of_attendances[$loop->iteration-1] }}</td>
                         <td>{{ $subscription[$loop->iteration-1] }}</td>
                         <td>
-                            {{ $cost_per_session[$loop->iteration-1] }} EGP
+                            {{ $cost_per_session[$loop->iteration-1] }} SAR
                         </td>
                         <td>
-                            {{ $revenue[$loop->iteration-1] }} EGP
+                            {{ $revenue[$loop->iteration-1] }} SAR
                         </td>
                     </tr>
                     @empty

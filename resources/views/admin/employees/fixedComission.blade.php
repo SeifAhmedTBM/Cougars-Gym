@@ -51,7 +51,7 @@
                                 <td>{{ $attend->schedule->session->name ?? '-' }} <br>
                                     {{ date('h:i A', strtotime($attend->schedule->timeslot->from)) ?? '-' }}</td>
                                 <td>{{ date('Y-m-d', strtotime($attend->created_at)) ?? '-' }}</td>
-                                <td>{{ $attend->schedule->comission_amount }} EGP </td>
+                                <td>{{ $attend->schedule->comission_amount }} SAR </td>
                             </tr>
                         @endforeach
 

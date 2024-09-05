@@ -17,7 +17,7 @@
                 {{ trans('global.total') . ' : ' . $attendants->count() }}
             </span>
             <span class="d-inline-block ml-4 text-success font-weight-bold">
-                ( {{ trans('global.revenue') . ' : ' . $revenue . ' EGP' }} )
+                ( {{ trans('global.revenue') . ' : ' . $revenue . ' SAR' }} )
             </span>
         </h4>
     </div>
@@ -54,7 +54,7 @@
                                     {{ round(
                                         $attendant->membership->invoice->net_amount /
                                         $attendant->membership->service_pricelist->session_count
-                                    ) . ' EGP' }}
+                                    ) . ' SAR' }}
                                 @else
                                     <span class="badge badge-danger text-light">
                                         {{ trans('global.no_invoice_available') }}

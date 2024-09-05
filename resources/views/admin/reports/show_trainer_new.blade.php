@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body  text-center">
-                            <h5 class="fs-4 fw-semibold">{{  number_format($trainer->employee->target_amount ?? 0) }} EGP</h5>
+                            <h5 class="fs-4 fw-semibold">{{  number_format($trainer->employee->target_amount ?? 0) }} SAR</h5>
                             {{ trans('global.target') }}
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h5 class="fs-4 fw-semibold">{{ number_format($trainer->trainer_memberships->sum('payments_sum_amount')) ?? 0 }} EGP ({{ $trainer->trainer_memberships->sum('payments_count') }})</h5>
+                            <h5 class="fs-4 fw-semibold">{{ number_format($trainer->trainer_memberships->sum('payments_sum_amount')) ?? 0 }} SAR ({{ $trainer->trainer_memberships->sum('payments_count') }})</h5>
                             Payments this month
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <h5 class="fs-4 fw-semibold">
-                                {{ number_format($trainer->previous_trainer_memberships->sum('payments_sum_amount')) ?? 0 }} EGP 
+                                {{ number_format($trainer->previous_trainer_memberships->sum('payments_sum_amount')) ?? 0 }} SAR 
                                 ({{ $trainer->previous_trainer_memberships->sum('payments_count') }})
                             </h5>
                             Payments last month

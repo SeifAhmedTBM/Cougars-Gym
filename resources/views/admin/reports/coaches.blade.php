@@ -64,7 +64,7 @@
                             </td>
                             <td class="font-weight-bold">
                                 <a href="{{ route('admin.reports.revenue-details', ['date' => request('month') != NULL ? request('month') : date('Y-m'), 'trainer' => $report['trainer_id']]) }}">
-                                    {{ $report['revenue'] . ' EGP' }}
+                                    {{ $report['revenue'] . ' SAR' }}
                                 </a>
                             </td>
                             <td class="font-weight-bold">

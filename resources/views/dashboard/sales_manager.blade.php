@@ -86,7 +86,7 @@
         <div class="card">
             <div class="card-body bg-success text-white text-center">
                 <div>
-                    <h5 class="fs-4 fw-semibold">{{ number_format($manager_target) . ' EGP' }}</h5>
+                    <h5 class="fs-4 fw-semibold">{{ number_format($manager_target) . ' SAR' }}</h5>
                     <h5> {{ trans('global.target') }}</h5>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 <div>
                     {{-- <a href="" style="color:white;"> --}}
                         <h5 class="fs-4 fw-semibold"> 
-                            {{ number_format($manager_achieved) . ' EGP' }} ({{ number_format($manager_achieved_per,2) }}%)
+                            {{ number_format($manager_achieved) . ' SAR' }} ({{ number_format($manager_achieved_per,2) }}%)
                         </h5> 
                     {{-- </a> --}}
                     <h5>{{ trans('global.achieved') }}</h5>
@@ -114,7 +114,7 @@
         <div class="card">
             <div class="card-body bg-warning text-white text-center">
                 <div>
-                    <h5 class="fs-4 fw-semibold">{{ number_format($manager_pending).' EGP' ?? 0 }}</h5>
+                    <h5 class="fs-4 fw-semibold">{{ number_format($manager_pending).' SAR' ?? 0 }}</h5>
                     <h5> {{ trans('global.pending') }}</h5>
                 </div>
             </div>
@@ -262,7 +262,7 @@
                         <tr>
                             <td class="font-weight-bold">{{ $loop->iteration }}</td>
                             <td class="font-weight-bold">{{ $sale->name ?? '-' }}</td>
-                            <td class="font-weight-bold">{{ number_format($sale->invoices->sum('rest')) }} EGP</td>
+                            <td class="font-weight-bold">{{ number_format($sale->invoices->sum('rest')) }} SAR</td>
                             <td class="font-weight-bold">{{ $sale->invoices_count }}</td>
                             <td class="font-weight-bold">
                                 <a href="{{ route('admin.invoice.duePayments',$sale->id) }}" class="btn font-weight-bold btn-primary btn-sm">
@@ -356,9 +356,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $sale->name }}</td>
                             <td>{{ $sale->memberships_count }}</td>
-                            <td>{{ number_format($sale->employee->target_amount ?? 0) }} EGP</td>
+                            <td>{{ number_format($sale->employee->target_amount ?? 0) }} SAR</td>
                             <td>
-                                {{ number_format($sale->payments->sum('amount')) ?? 0 }} EGP ({{ $sale->payments->count() }})
+                                {{ number_format($sale->payments->sum('amount')) ?? 0 }} SAR ({{ $sale->payments->count() }})
                             </td>
                             <td>
                                 @if(isset($sale->payments) && $sale->employee->target_amount > 0)
@@ -383,7 +383,7 @@
                                             $sales_sales_tier_amount = ($sales_payments * $sale->sales_tier->sales_tier->sales_tiers_ranges()->where('range_from', '<=', $achieved)->orderBy('range_from','desc')->first()->commission) / 100;
                                         }
                                     @endphp
-                                    {{ $sales_payments ? $sales_sales_tier_amount : 0 }} EGP
+                                    {{ $sales_payments ? $sales_sales_tier_amount : 0 }} SAR
                                     @else
                                         {{ trans('global.there_is_no_sales_tier') }}
                                     @endisset

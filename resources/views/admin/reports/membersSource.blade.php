@@ -58,7 +58,7 @@
                                     <td>{{ $key }}</td>
                                     <td>{{ $payments->count() }}</td>
                                     <td>
-                                        {{ number_format($payments->sum('amount')) }} EGP
+                                        {{ number_format($payments->sum('amount')) }} SAR
                                     </td> 
                                 </tr>
                             @endforeach

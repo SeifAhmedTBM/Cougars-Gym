@@ -9,7 +9,7 @@
                         <div class="card mb-2">
                             <div class="card-body text-center text-white bg-primary">
                                 <div>
-                                    <h3>{{ number_format($payments->sum('amount')) }} EGP<span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ number_format($payments->sum('amount')) }} SAR<span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('global.payments.title') }}</div>
                                 </div>
                             </div>
@@ -20,7 +20,7 @@
                         <div class="card mb-2 ">
                             <div class="card-body text-center text-white bg-primary">
                                 <div>
-                                    <h3>{{ number_format($external_payments->sum('amount')) }} EGP<span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ number_format($external_payments->sum('amount')) }} SAR<span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('cruds.externalPayment.title') }}</div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                         <div class="card mb-2">
                             <div class="card-body text-center text-white bg-primary">
                                 <div>
-                                    <h3>{{ number_format($total_income) }} EGP<span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ number_format($total_income) }} SAR<span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('global.total_income') }}</div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                         <div class="card mb-2">
                             <div class="card-body text-center text-white bg-danger">
                                 <div>
-                                    <h3>{{ number_format($refunds->sum('amount')) }} EGP<span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ number_format($refunds->sum('amount')) }} SAR<span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('cruds.refund.title') }}</div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                         <div class="card mb-2 ">
                             <div class="card-body text-center text-white bg-danger">
                                 <div>
-                                    <h3>{{ number_format($expenses->sum('amount')) }} EGP<span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ number_format($expenses->sum('amount')) }} SAR<span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('cruds.expense.title') }}</div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                         <div class="card mb-2 text-center text-white bg-danger">
                             <div class="card-body">
                                 <div>
-                                    <h3>{{ number_format($total_outcome) }} EGP<span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ number_format($total_outcome) }} SAR<span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('global.total_outcome') }}</div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                         <div class="card mb-2 text-center text-white bg-success">
                             <div class="card-body">
                                 <div>
-                                    <h3>{{ number_format($net_income) }} EGP<span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ number_format($net_income) }} SAR<span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('global.net_income') }}</div>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                         <div class="card mb-4">
                             <div class="card-body text-center text-white bg-info">
                                 <div>
-                                    <h3>{{ $renewals_payments_count }} ({{ number_format($renewals_payments).' EGP' }}) <span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ $renewals_payments_count }} ({{ number_format($renewals_payments).' SAR' }}) <span class="fs-6 fw-normal"></h3>
                                     <div>{{ trans('cruds.membership.fields.renew') }}</div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                         <div class="card mb-4 ">
                             <div class="card-body text-center text-white bg-info">
                                 <div>
-                                    <h3>{{ $new_payments_count }} ({{ number_format($new_payments).' EGP' }})  <span class="fs-6 fw-normal"></h3>
+                                    <h3>{{ $new_payments_count }} ({{ number_format($new_payments).' SAR' }})  <span class="fs-6 fw-normal"></h3>
                                     <div>New Members</div>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h3>{{ trans('global.income') }} : <span class="text-primary">{{ $total_income }} EGP</span></h3>
+                <h3>{{ trans('global.income') }} : <span class="text-primary">{{ $total_income }} SAR</span></h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -265,7 +265,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong>{{ $key }} - {{ trans('global.income') }} : <span class="text-primary">{{ $payment->sum('amount') }} EGP ({{ $payment->count().' Payment' }})</span> </strong> 
+                                    <strong>{{ $key }} - {{ trans('global.income') }} : <span class="text-primary">{{ $payment->sum('amount') }} SAR ({{ $payment->count().' Payment' }})</span> </strong> 
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-striped table-hover table-bordered zero-configuration table-responsive">
@@ -329,7 +329,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h3>{{ trans('global.outcome') }} : <span class="text-danger">{{ $total_outcome }} EGP</span></h3>
+                <h3>{{ trans('global.outcome') }} : <span class="text-danger">{{ $total_outcome }} SAR</span></h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -427,7 +427,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong>{{ $key }} - {{ trans('global.outcome') }} : <span class="text-danger">{{ $refund->sum('amount') }} EGP ({{ $refund->count().' Refund' }})</span> </strong>
+                                    <strong>{{ $key }} - {{ trans('global.outcome') }} : <span class="text-danger">{{ $refund->sum('amount') }} SAR ({{ $refund->count().' Refund' }})</span> </strong>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-striped table-hover table-bordered zero-configuration">

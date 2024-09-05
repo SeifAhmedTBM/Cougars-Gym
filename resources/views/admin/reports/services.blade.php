@@ -21,7 +21,7 @@
 
         <div class="col-md-3 offset-md-6">
             <h3 class="text-center">{{ trans('global.total_income') }}</h3>
-            <h3 class="text-center">{{ number_format($report->sum('payments')) }} EGP</h3>
+            <h3 class="text-center">{{ number_format($report->sum('payments')) }} SAR</h3>
         </div>
     </div>
 </form>

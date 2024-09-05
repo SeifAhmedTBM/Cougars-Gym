@@ -100,7 +100,7 @@
                             <tr class="text-center">
                                 <td colspan="7"></td>
                                 <td>{{round($total_session_cost)}}</td>
-                                <td class="bg-secondary font-weight-bold">{{round($total_comission)}} EGP</td>
+                                <td class="bg-secondary font-weight-bold">{{round($total_comission)}} SAR</td>
                             </tr>
                         </tfoot>
                     </table>

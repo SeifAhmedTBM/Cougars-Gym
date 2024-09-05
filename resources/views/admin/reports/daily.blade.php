@@ -103,7 +103,7 @@
                             <div class="card-body text-center bg-light">
                                 <div>
                                     <h3>{{ trans('cruds.membership.fields.renew') }} <span class="badge badge-success badge-pill">{{ $renewals_payments_count }}</span></h3>
-                                    <h3>{{ number_format($renewals_payments).' EGP' }}</h3>
+                                    <h3>{{ number_format($renewals_payments).' SAR' }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                             <div class="card-body text-center bg-light">
                                 <div>
                                     <h3>New Members <span class="badge badge-success badge-pill">{{ $new_payments_count }}</span></h3> 
-                                    <h3>{{ number_format($new_payments).' EGP' }}</h3>
+                                    <h3>{{ number_format($new_payments).' SAR' }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                     <div class="card mb-2">
                                         <div class="card-body text-center  bg-primary">
                                             <div>
-                                                <h3>{{ number_format($total) }} EGP<span class="fs-6 fw-normal"></h3>
+                                                <h3>{{ number_format($total) }} SAR<span class="fs-6 fw-normal"></h3>
                                                 <div style="font-size: 14px !important;">{{ $account->name }}</div>
                                             </div>
                                         </div>
@@ -282,18 +282,18 @@
                                             <tr>
                                                 <td colspan="2"></td>
                                                 @foreach ($service_payments as $key => $payment)
-                                                    <td>{{ number_format($payment->sum('amount')) }} EGP</td>
+                                                    <td>{{ number_format($payment->sum('amount')) }} SAR</td>
                                                 @endforeach
-                                                <td>{{ number_format($total_revenues) }} EGP</td>
-                                                <td class="bg-primary" id="total_income">{{ number_format($total_income) }} EGP</td>
+                                                <td>{{ number_format($total_revenues) }} SAR</td>
+                                                <td class="bg-primary" id="total_income">{{ number_format($total_income) }} SAR</td>
                                                 @foreach ($service_refunds as $key => $refund)
-                                                    <td>{{ number_format($refund->sum('amount')) }} EGP</td>
+                                                    <td>{{ number_format($refund->sum('amount')) }} SAR</td>
                                                 @endforeach
-                                                <td>{{ number_format($total_commission_fees,1) }} EGP</td>
-                                                <td>{{ number_format($total_expenses) }} EGP</td>
-                                                <td>{{ number_format($total_loans) }} EGP</td>
-                                                <td class="bg-danger" id="total_outcome">{{ number_format($total_outcome) }} EGP</td>
-                                                <td class="bg-success" id="net_income">{{ number_format($total_balance) }} EGP</td>
+                                                <td>{{ number_format($total_commission_fees,1) }} SAR</td>
+                                                <td>{{ number_format($total_expenses) }} SAR</td>
+                                                <td>{{ number_format($total_loans) }} SAR</td>
+                                                <td class="bg-danger" id="total_outcome">{{ number_format($total_outcome) }} SAR</td>
+                                                <td class="bg-success" id="net_income">{{ number_format($total_balance) }} SAR</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -310,7 +310,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <strong>{{ trans('cruds.expense.title') }} : <span class="text-white">{{ number_format($expenses->sum('amount')) }} EGP ({{ $expenses->count() }})</span> </strong>
+                            <strong>{{ trans('cruds.expense.title') }} : <span class="text-white">{{ number_format($expenses->sum('amount')) }} SAR ({{ $expenses->count() }})</span> </strong>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped table-hover table-bordered zero-configuration">
@@ -342,7 +342,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <strong>{{ trans('cruds.loan.title') }} : <span class="text-white">{{ number_format($loans->sum('amount')) }} EGP ({{ $loans->count() }})</span> </strong>
+                            <strong>{{ trans('cruds.loan.title') }} : <span class="text-white">{{ number_format($loans->sum('amount')) }} SAR ({{ $loans->count() }})</span> </strong>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped table-hover table-bordered zero-configuration">
@@ -374,7 +374,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <strong>{{ trans('cruds.externalPayment.title') }} : <span class="text-white">{{ number_format($external_payments->sum('amount')) }} EGP ({{ $external_payments->count() }})</span> </strong>
+                            <strong>{{ trans('cruds.externalPayment.title') }} : <span class="text-white">{{ number_format($external_payments->sum('amount')) }} SAR ({{ $external_payments->count() }})</span> </strong>
                         </div>
                         <div class="card-body">
                             <table class="table table-striped table-hover table-bordered zero-configuration">
@@ -413,7 +413,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>{{ $key }} - {{ trans('global.income') }} : <span class="text-white">{{ number_format($payment->sum('amount')) }} EGP ({{ $payment->count().' Payment' }})</span> </strong> 
+                            <strong>{{ $key }} - {{ trans('global.income') }} : <span class="text-white">{{ number_format($payment->sum('amount')) }} SAR ({{ $payment->count().' Payment' }})</span> </strong> 
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-striped table-hover table-bordered zero-configuration">
@@ -470,7 +470,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>{{ $key }} - {{ trans('global.outcome') }} : <span class="text-danger">{{ number_format($refund->sum('amount')) }} EGP ({{ $refund->count().' Refund' }})</span> </strong>
+                            <strong>{{ $key }} - {{ trans('global.outcome') }} : <span class="text-danger">{{ number_format($refund->sum('amount')) }} SAR ({{ $refund->count().' Refund' }})</span> </strong>
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-striped table-hover table-bordered zero-configuration">
