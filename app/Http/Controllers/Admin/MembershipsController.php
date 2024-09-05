@@ -1373,8 +1373,8 @@ class MembershipsController extends Controller
     {
         $request->validate([
             'email' => 'nullable|unique:users,email',
-            'national' => 'nullable|min:14|max:14|unique:leads,national',
-            'phone' => 'required_if:member_type,new_member|min:11|max:11|unique:leads,phone',
+            'national' => 'nullable|min:6|max:14|unique:leads,national',
+            'phone' => 'required_if:member_type,new_member|min:10|max:11|unique:leads,phone',
             'lead' => 'required',
             'member_code' => 'required_if:member_type,new_member|unique:leads,member_code',
             'source_id' => 'required_if:member_type,new_member',

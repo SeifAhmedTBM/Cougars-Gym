@@ -324,8 +324,8 @@ class MembersController extends Controller
         $request->validate([
             'email' => 'nullable|unique:users,email',
             // 'member_code'           => 'unique:leads,member_code',
-            'phone' => 'required_unless:minor,yes|min:11|max:11|unique:leads,phone',
-            'national' => 'nullable|nullable|min:14|max:14|unique:leads,national',
+            'phone' => 'required_unless:minor,yes|min:10|max:10|unique:leads,phone',
+            'national' => 'nullable|nullable|min:6|max:14|unique:leads,national',
             'name' => 'required',
             'status_id' => 'required',
             'source_id' => 'required',
@@ -579,8 +579,8 @@ class MembersController extends Controller
     {
         $request->validate([
             "email" => "nullable|unique:users,email,$member->user_id",
-            "national" => "nullable|min:14|max:14|unique:leads,national,$member->id",
-            "phone" => "required_unless:minor,yes|min:11|max:11|unique:leads,phone,$member->id",
+            "national" => "nullable|min:6|max:14|unique:leads,national,$member->id",
+            "phone" => "required_unless:minor,yes|min:10|max:11|unique:leads,phone,$member->id",
             // 'member_code'       => "unique:leads,member_code,$member->member_code",
             'name' => 'required',
             'source_id' => 'required',
@@ -1046,8 +1046,8 @@ class MembersController extends Controller
 
         $request->validate([
             "email" => "nullable|unique:users,email,$member->user_id",
-            "national" => "nullable|min:14|max:14|unique:leads,national,$id",
-            "phone" => "required|min:11|max:11|unique:leads,phone,$id",
+            "national" => "nullable|min:6|max:14|unique:leads,national,$id",
+            "phone" => "required|min:10|max:11|unique:leads,phone,$id",
             'name' => 'required',
             // 'member_code'           => 'required|unique:leads,member_code',
             'status_id' => 'required',
