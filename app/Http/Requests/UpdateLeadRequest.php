@@ -24,12 +24,12 @@ class UpdateLeadRequest extends FormRequest
             'phone' => [
                 'nullable',
                 'required',
-                'min:11',
+                'min:10',
                 'max:11'
             ],
             'national' => [
                 'nullable',
-                'min:14',
+                'min:6',
                 'max:14'
             ],
             'status_id' => [

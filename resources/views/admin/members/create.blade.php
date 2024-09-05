@@ -65,7 +65,7 @@
                         <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text"
                                name="phone" id="phone" value="{{ old('phone', '') }}" required
                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                               min="11" max="11">
+                               min="10" max="11">
 
                         @if ($errors->has('phone'))
                             <div class="invalid-feedback">
@@ -194,7 +194,7 @@
                                for="national">{{ trans('cruds.member.fields.national') }}</label>
                         <input class="form-control {{ $errors->has('national') ? 'is-invalid' : '' }}" type="text"
                                name="national" id="national" value="{{ old('national', '') }}"
-                               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="14" max="14" required' :''}}>
+                               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="6" max="14" required' :''}}>
                         @if ($errors->has('national'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('national') }}

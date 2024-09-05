@@ -232,7 +232,7 @@ class LeadsController extends Controller
     {
         $request->validate([
             'name'                 => 'string|required',
-            'phone'                => 'string|required_unless:minor,yes|min:11|max:11|unique:leads,phone,NULL,id,deleted_at,NULL',
+            'phone'                => 'string|required_unless:minor,yes|min:10|max:11|unique:leads,phone,NULL,id,deleted_at,NULL',
             'source_id'            => 'required',
             'gender'               => 'required',
             'sales_by_id'          => 'required',
@@ -321,7 +321,7 @@ class LeadsController extends Controller
     {
         $request->validate([
             "name"                 => "string|required",
-            "phone"                => "required_unless:minor,yes|min:11|max:11|unique:leads,phone,$lead->id",
+            "phone"                => "required_unless:minor,yes|min:10|max:11|unique:leads,phone,$lead->id",
             // "national"             => "string|required_unless:minor,yes|min:14|max:14|unique:leads,national,$lead->id",
             // "national"             => "nullable|min:14|max:14|unique:leads,national,$lead->id",
             "branch_id"            => "required",
