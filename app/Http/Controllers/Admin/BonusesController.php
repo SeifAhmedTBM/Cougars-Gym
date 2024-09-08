@@ -79,7 +79,7 @@ class BonusesController extends Controller
             });
 
             $table->editColumn('amount', function ($row) {
-                return $row->amount ? $row->amount . ' EGP' : '';
+                return $row->amount ? $row->amount . ' SAR' : '';
             });
 
             $table->addColumn('created_by_name', function ($row) {

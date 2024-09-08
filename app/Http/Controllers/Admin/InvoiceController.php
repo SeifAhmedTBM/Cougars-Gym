@@ -124,7 +124,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('discount', function ($row) {
-                return $row->discount ? $row->discount . ' EGP' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') :  '0 EGP' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>');
+                return $row->discount ? $row->discount . ' SAR' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') :  '0 SAR' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>');
             });
 
             $table->addColumn('member', function ($row) use ($setting) {
@@ -132,7 +132,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('amount', function ($row) {
-                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' EGP' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' EGP <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' EGP' : '';
+                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' SAR' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' SAR <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' SAR' : '';
             });
 
             $table->editColumn('status', function ($row) {
@@ -150,7 +150,7 @@ class InvoiceController extends Controller
             }
 
             $table->addColumn('membership_service', function ($row) {
-                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' EGP' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
+                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' SAR' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
             });
 
             $table->addColumn('trainer', function ($row) {
@@ -285,7 +285,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('discount', function ($row) {
-                return $row->discount ? $row->discount . ' EGP' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') :  '0 EGP' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>');
+                return $row->discount ? $row->discount . ' SAR' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') :  '0 SAR' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>');
             });
 
             $table->addColumn('member', function ($row) use ($setting) {
@@ -293,7 +293,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('amount', function ($row) {
-                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' EGP' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' EGP <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' EGP' : '';
+                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' SAR' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' SAR <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' SAR' : '';
             });
 
             $table->editColumn('status', function ($row) {
@@ -311,7 +311,7 @@ class InvoiceController extends Controller
             }
 
             $table->addColumn('membership_service', function ($row) {
-                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' EGP' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
+                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' SAR' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
             });
 
             $table->addColumn('trainer', function ($row) {
@@ -694,7 +694,7 @@ class InvoiceController extends Controller
         //     ->logo(public_path('images/'. Setting::first()->menu_logo))
         //     ->dateFormat('Y/m/d')
         //     ->currencySymbol('L.E')
-        //     ->currencyCode('EGP')
+        //     ->currencyCode('SAR')
         //     ->notes($invoice_tmp['footer'])
         //     ->addItem($item);
         // $invoice = $this->invoice($id);
@@ -987,7 +987,7 @@ class InvoiceController extends Controller
             ->logo(public_path('images/' . Setting::first()->menu_logo))
             ->dateFormat('Y/m/d')
             ->currencySymbol('L.E')
-            ->currencyCode('EGP')
+            ->currencyCode('SAR')
             ->notes($invoice_tmp['footer'])
             ->addItem($item);
         return $invoice;
@@ -1083,7 +1083,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('discount', function ($row) {
-                return $row->discount ? $row->discount . ' EGP' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') : 0;
+                return $row->discount ? $row->discount . ' SAR' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') : 0;
             });
 
             $table->addColumn('member', function ($row) use ($setting) {
@@ -1091,7 +1091,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('amount', function ($row) {
-                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' EGP' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' EGP <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' EGP' : '';
+                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' SAR' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' SAR <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' SAR' : '';
             });
 
             $table->editColumn('status', function ($row) {
@@ -1109,7 +1109,7 @@ class InvoiceController extends Controller
             }
 
             $table->addColumn('membership_service', function ($row) {
-                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' EGP' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
+                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' SAR' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
             });
 
             $table->addColumn('trainer', function ($row) {
@@ -1215,7 +1215,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('discount', function ($row) {
-                return $row->discount ? $row->discount . ' EGP' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') : 0;
+                return $row->discount ? $row->discount . ' SAR' . '<br />' . ($row->discount_notes !== NULL ? $row->discount_notes : '<span class="badge badge-danger">No Notes</span>') : 0;
             });
 
             $table->addColumn('member', function ($row) use ($setting) {
@@ -1223,7 +1223,7 @@ class InvoiceController extends Controller
             });
 
             $table->editColumn('amount', function ($row) {
-                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' EGP' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' EGP <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' EGP' : '';
+                return $row->net_amount ? "<span class='text-success font-weight-bold'>" . trans('global.net') . "</span>" . ' : ' . $row->net_amount . ' SAR' . '<br/>' .  "<span class='text-primary font-weight-bold'>" . trans('invoices::invoice.paid') . "</span>" . ' : ' . $row->payments->sum('amount') . ' SAR <br />' . "<span class='text-danger font-weight-bold'>" . trans('global.rest') . "</span>" . ' : ' . $row->rest . ' SAR' : '';
             });
 
             $table->editColumn('status', function ($row) {
@@ -1241,7 +1241,7 @@ class InvoiceController extends Controller
             }
 
             $table->addColumn('membership_service', function ($row) {
-                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' EGP' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
+                return $row->membership && $row->membership->service_pricelist && $row->membership->service_pricelist->service && $row->membership->service_pricelist->service->service_type ? $row->membership->service_pricelist->name . '<br />' . trans('cruds.invoice.fields.service_fee') . ' : ' . $row->service_fee . ' SAR' . '<br>' . '<span class="badge p-2 badge-' . Membership::MEMBERSHIP_STATUS_COLOR[$row->membership->membership_status] . '"">' . Membership::MEMBERSHIP_STATUS[$row->membership->membership_status] . '</span>' : '-';
             });
 
             $table->addColumn('trainer', function ($row) {

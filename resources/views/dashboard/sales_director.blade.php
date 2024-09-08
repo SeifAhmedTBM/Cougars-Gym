@@ -23,7 +23,7 @@
                             <i class="cil-globe-alt progress-group-icon me-2"></i>
                             <div>{{ $branch->name }}</div>
                             <div class="ms-auto font-weight-bold me-2">
-                                {{ number_format($branch->sales_manager->employee->target_amount ?? 0).' EGP' }}
+                                {{ number_format($branch->sales_manager->employee->target_amount ?? 0).' SAR' }}
                             </div>
                             <div class="text-white small">
                                 ({{ $branch->sales_manager && $branch->sales_manager->employee && $branch->sales_manager->employee->target_amount != 0 ? number_format(($branch->payments_sum_amount / $branch->sales_manager->employee->target_amount) * 100,2).' %' : '0 %' }})
@@ -31,7 +31,7 @@
                         </div>
                         <div class="progress-group-bars">
                             <div class="progress progress-xs">
-                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ $branch->sales_manager && $branch->sales_manager->employee && $branch->sales_manager->employee->target_amount != 0 ? number_format(($branch->payments_sum_amount / $branch->sales_manager->employee->target_amount) * 100,2) : '0' }}%" aria-valuenow="{{ $branch->sales_manager && $branch->sales_manager->employee && $branch->sales_manager->employee->target_amount != 0 ? number_format(($branch->payments_sum_amount / $branch->sales_manager->employee->target_amount) * 100,2) : '0' }}" aria-valuemin="0" aria-valuemax="100"><strong>{{ number_format($branch->payments_sum_amount).' EGP' }}</strong></div>
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ $branch->sales_manager && $branch->sales_manager->employee && $branch->sales_manager->employee->target_amount != 0 ? number_format(($branch->payments_sum_amount / $branch->sales_manager->employee->target_amount) * 100,2) : '0' }}%" aria-valuenow="{{ $branch->sales_manager && $branch->sales_manager->employee && $branch->sales_manager->employee->target_amount != 0 ? number_format(($branch->payments_sum_amount / $branch->sales_manager->employee->target_amount) * 100,2) : '0' }}" aria-valuemin="0" aria-valuemax="100"><strong>{{ number_format($branch->payments_sum_amount).' SAR' }}</strong></div>
                             </div>
                         </div>
                     </div>

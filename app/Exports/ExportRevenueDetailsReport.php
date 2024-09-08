@@ -46,7 +46,7 @@ class ExportRevenueDetailsReport implements FromCollection, WithHeadings
                 'Membership Details'        =>  $memberships_details,
                 'Sessions Cost'             =>  !is_null($rev->membership->invoice) ? round(
                                                 $rev->membership->invoice->net_amount / $rev->membership->service_pricelist->session_count
-                                                ) . ' EGP' : 0,
+                                                ) . ' SAR' : 0,
                 'Session Details'           => $rev->schedule->session->name . ' ( ' . date('g:i A', strtotime($rev->schedule->timeslot->from)) . ' ) ',
                 'Attended At'               => $rev->created_at->format('Y-m-d , g:i:s A')
             ]);

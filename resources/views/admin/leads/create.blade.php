@@ -57,7 +57,7 @@
                         <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text"
                             name="phone" id="phone" value="{{ old('phone', '') }}" required
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            min="11" max="11">
+                            min="10" max="11">
                         @if ($errors->has('phone'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('phone') }}
@@ -117,7 +117,7 @@
                         <input class="form-control {{ $errors->has('national') ? 'is-invalid' : '' }}" type="text"
                             name="national" id="national" value="{{ old('national') }}"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="14" max="14" required' : '' }}>
+                            {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="6" max="14" required' : '' }}>
                         @if ($errors->has('national'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('national') }}
@@ -432,7 +432,7 @@
         });
 
         $('#phone').on('keyup', function() {
-            if ($('#phone').val().length == 11) {
+            if ($('#phone').val().length == 10) {
                 $('#phone').removeClass('is-invalid').addClass('is-valid');
             } else {
                 $('#phone').removeClass('is-valid').addClass('is-invalid');
@@ -443,7 +443,7 @@
     @if (config('domains')[config('app.url')]['national_id'] == true)
         <script>
             $('#national').on('keyup', function() {
-                if ($('#national').val().length == 14) {
+                if ($('#national').val().length >= 6) {
                     $('#national').removeClass('is-invalid').addClass('is-valid');
                 } else {
                     $('#national').removeClass('is-valid').addClass('is-invalid');

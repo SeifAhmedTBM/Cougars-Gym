@@ -41,7 +41,8 @@ return [
         'minor'                         => false,
         'short_reports'                 => false,
         'add_to_class_in_invoice'       => false,
-        'settlement_invoices'           => false
+        'settlement_invoices'           => false,
+        'transactions_date'             => true
     ],
     "http://localhost/gymapp/public" => [
         "employees_schedule"            => true,

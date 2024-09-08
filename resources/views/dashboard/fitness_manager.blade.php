@@ -33,31 +33,31 @@
                         <tr>
                             <td>#{{ $loop->iteration }}</td>
                             <td class="font-weight-bold text-dark">{{ $trainer_name }}</td>
-                            <td class="font-weight-bold text-dark">{{ number_format($commission->where('trainer_id', $trainer_id)->first()['totalInvoices']) . ' EGP' }}</td>
+                            <td class="font-weight-bold text-dark">{{ number_format($commission->where('trainer_id', $trainer_id)->first()['totalInvoices']) . ' SAR' }}</td>
                             @php
                                 $pre_com = $pre_commission->where('trainer_id', $trainer_id)->first();
                             @endphp
                             <td class="font-weight-bold">
-                                {{ round($commission->where('trainer_id', $trainer_id)->first()['total']) }} EGP
+                                {{ round($commission->where('trainer_id', $trainer_id)->first()['total']) }} SAR
                             </td>
                             <td class="font-weight-bold">
                                 @if(isset($pre_com) && $pre_com != NULL)
-                                    {{ round($pre_com['pre_total']) }} EGP 
+                                    {{ round($pre_com['pre_total']) }} SAR 
                                 @else 
-                                    0 EGP 
+                                    0 SAR 
                                 @endif
                             </td>
                             <td class="font-weight-bold">
-                                {{ $commission->where('trainer_id', $trainer_id)->first()['commission'] != 0 ? round(intval($commission->where('trainer_id', $trainer_id)->first()['commission'])) . ' EGP' : '0 EGP ' }}
+                                {{ $commission->where('trainer_id', $trainer_id)->first()['commission'] != 0 ? round(intval($commission->where('trainer_id', $trainer_id)->first()['commission'])) . ' SAR' : '0 SAR ' }}
                             </td>
                             <td class="font-weight-bold">
                                 @if(isset($pre_com) && $pre_com != NULL) 
-                                    {{ round($pre_com['previous_months_commissions']) . ' EGP' }} 
+                                    {{ round($pre_com['previous_months_commissions']) . ' SAR' }} 
                                 @else 
-                                    0 EGP 
+                                    0 SAR 
                                 @endif</td>
                             <td class="font-weight-bold">
-                                {{ round(intval($commission->where('trainer_id', $trainer_id)->first()['commission'])) + (isset($pre_com['previous_months_commissions']) ? round($pre_com['previous_months_commissions']) : 0) }} EGP
+                                {{ round(intval($commission->where('trainer_id', $trainer_id)->first()['commission'])) + (isset($pre_com['previous_months_commissions']) ? round($pre_com['previous_months_commissions']) : 0) }} SAR
                             </td>
                             <td>
                                 <a href="{{ route('admin.reports.trainers-report.show', $trainer_id) }}" class="btn btn-sm btn-primary">

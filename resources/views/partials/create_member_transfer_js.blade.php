@@ -160,8 +160,8 @@
                     $("#account_id").append(`<option value='${resp.id}'>${resp.name}</option>`)
                 })
 
+                $('#accounts_div').empty();
                 response.accounts.forEach(resp => {
-                    $('#accounts_div').empty();
                     $('#accounts_div').append(`
                         <input type="hidden" name="account_ids[]" value="${resp.id}">
                         <div class="col-md-3">
@@ -257,7 +257,7 @@
     }
 
     $('#phone').on('keyup',function(){
-        if ($('#phone').val().length == 11) {
+        if ($('#phone').val().length == 10) {
             $('#phone').removeClass('is-invalid').addClass('is-valid');
         }else{
             $('#phone').removeClass('is-valid').addClass('is-invalid');
@@ -269,7 +269,7 @@
 @if (config('domains')[config('app.url')]['national_id'] == true)
     <script>
         $('#national').on('keyup',function(){
-            if ($('#national').val().length == 14) {
+            if ($('#national').val().length >= 6) {
                 $('#national').removeClass('is-invalid').addClass('is-valid');
             }else{
                 $('#national').removeClass('is-valid').addClass('is-invalid');

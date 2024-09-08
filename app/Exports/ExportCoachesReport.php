@@ -38,7 +38,7 @@ class ExportCoachesReport implements FromCollection , WithHeadings
                 'Coach'                     => $report['trainer_name'],
                 'Sessions Instructed'       => $report['sessions_instructed'],
                 'Athletes Instructed'       => $report['athletes_instructed'],
-                'Revenue'                   => $report['revenue'] . ' EGP'
+                'Revenue'                   => $report['revenue'] . ' SAR'
             ]);
         }
         return $data;

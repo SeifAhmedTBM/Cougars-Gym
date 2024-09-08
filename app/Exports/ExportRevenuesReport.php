@@ -38,7 +38,7 @@ class ExportRevenuesReport implements FromCollection, WithHeadings
                 'Max Capacity'          =>  $rep['session']['max_capacity'],
                 'Session Count'         =>  $rep['sessions_count'],
                 'Attended'              =>  $rep['attendants'],
-                'Revenue'               =>  round($rep['revenue']) . ' EGP',
+                'Revenue'               =>  round($rep['revenue']) . ' SAR',
                 'Utilization Rate'      =>  $rep['utilization_rate']
             ]);
         }

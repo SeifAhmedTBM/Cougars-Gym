@@ -55,17 +55,17 @@
                                 {{ $employee->days->sum('working_hours') ?? '---' }} Hour/s
                             </td>
                             <td>
-                                {{ number_format($employee->salary) . ' EGP' }}
+                                {{ number_format($employee->salary) . ' SAR' }}
                             </td>
                             <td>{{ $payrollData[$employee->id][1] }}</td>
-                            <td>{{ number_format($hoursRate * $payrollData[$employee->id][0]) . ' EGP' }}</td>
-                            <td>{{ $employee->deductions->sum('amount') . ' EGP' }}</td>
-                            <td>{{ $employee->bonuses->sum('amount') . ' EGP' }}</td>
+                            <td>{{ number_format($hoursRate * $payrollData[$employee->id][0]) . ' SAR' }}</td>
+                            <td>{{ $employee->deductions->sum('amount') . ' SAR' }}</td>
+                            <td>{{ $employee->bonuses->sum('amount') . ' SAR' }}</td>
                             <td>
                                 @if ($hoursRate > 0 && $payrollData[$employee->id][0] > 0)
-                                    {{ ($hoursRate * $payrollData[$employee->id][0]) + $employee->bonuses->sum('amount') - $employee->deductions->sum('amount') . ' EGP' }}
+                                    {{ ($hoursRate * $payrollData[$employee->id][0]) + $employee->bonuses->sum('amount') - $employee->deductions->sum('amount') . ' SAR' }}
                                 @else
-                                    0 EGP
+                                    0 SAR
                                 @endif
                             </td> --}}
                             {{-- <td>

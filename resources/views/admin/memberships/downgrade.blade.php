@@ -272,7 +272,7 @@
                                 type="number" name="discount_amount" id="discount_amount"
                                 value="{{ old('discount_amount') ?? 0 }}" required step="0.001">
                             <div class="input-group-append">
-                                <span class="input-group-text">EGP</span>
+                                <span class="input-group-text">SAR</span>
                             </div>
                         </div>
                         @if ($errors->has('discount_amount'))

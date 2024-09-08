@@ -57,8 +57,8 @@
                             <tr>
                                 <td class="font-weight-bold">{{ $loop->iteration }}</td>
                                 <td class="font-weight-bold">{{ $sale->name ?? '-' }}</td>
-                                <td class="font-weight-bold">{{ number_format($sale->invoices->sum('payments_sum_amount')) }} EGP</td>
-                                <td class="font-weight-bold">{{ number_format($sale->invoices->sum('rest')) }} EGP</td>
+                                <td class="font-weight-bold">{{ number_format($sale->invoices->sum('payments_sum_amount')) }} SAR</td>
+                                <td class="font-weight-bold">{{ number_format($sale->invoices->sum('rest')) }} SAR</td>
                                 <td class="font-weight-bold">{{ $sale->invoices_count }}</td>
                                 <td class="font-weight-bold">
                                     <a href="{{ route('admin.invoice.duePayments',$sale->id) }}" class="btn font-weight-bold btn-primary btn-sm">

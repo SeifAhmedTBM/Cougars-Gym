@@ -64,7 +64,7 @@
                         <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text"
                             name="phone" id="phone" value="{{ old('phone', $lead->phone) }}" required
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            min="11" max="11" {{ !is_null($lead->parent_phone) ? 'disabled' : '' }}>
+                            min="10" max="11" {{ !is_null($lead->parent_phone) ? 'disabled' : '' }}>
                         @if ($errors->has('phone'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('phone') }}
@@ -381,7 +381,7 @@
     @if (config('domains')[config('app.url')]['national_id'] == true)
         <script>
             // $('#national').on('keyup', function() {
-            //     if ($('#national').val().length == 14) {
+            //     if ($('#national').val().length >= 6) {
             //         $('#national').removeClass('is-invalid').addClass('is-valid');
             //     } else {
             //         $('#national').removeClass('is-valid').addClass('is-invalid');
@@ -389,7 +389,7 @@
             // })
 
             $('#phone').on('keyup', function() {
-                if ($('#phone').val().length == 11) {
+                if ($('#phone').val().length == 10) {
                     $('#phone').removeClass('is-invalid').addClass('is-valid');
                 } else {
                     $('#phone').removeClass('is-valid').addClass('is-invalid');

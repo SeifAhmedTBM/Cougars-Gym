@@ -77,7 +77,7 @@
         <div class="form-group">
             <div class="alert alert-warning text-center">
                 <i class="fa fa-exclamation-circle"></i>
-                Due Payments : {{ $invoices_without_refunds->sum('rest') }} EGP
+                Due Payments : {{ $invoices_without_refunds->sum('rest') }} SAR
             </div>
         </div>
     @endif

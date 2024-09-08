@@ -105,12 +105,12 @@
                                                 @endif
                                                 {{-- <li class="list-group-item">Paid Amount : 
                                                 <b class="member-phone">
-                                                    {{ $membership->invoice->payments->sum('amount') }} EGP
+                                                    {{ $membership->invoice->payments->sum('amount') }} SAR
                                                 </b>
                                             </li>
                                             <li class="list-group-item">Net Amount : 
                                                 <b class="member-phone">
-                                                    {{ $membership->invoice->net_amount - $membership->invoice->payments->sum('amount') }} EGP
+                                                    {{ $membership->invoice->net_amount - $membership->invoice->payments->sum('amount') }} SAR
                                                 </b>
                                             </li> --}}
                                             </ul>

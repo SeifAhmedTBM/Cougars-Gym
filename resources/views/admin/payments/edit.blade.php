@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-danger">
-            <h2 class="text-center">{{ trans('global.pending_amount').' '.($payment->invoice->rest + $payment->amount) . ' EGP' }}</h2>
+            <h2 class="text-center">{{ trans('global.pending_amount').' '.($payment->invoice->rest + $payment->amount) . ' SAR' }}</h2>
         </div>
     </div>
 </div>

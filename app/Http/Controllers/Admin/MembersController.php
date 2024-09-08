@@ -324,8 +324,8 @@ class MembersController extends Controller
         $request->validate([
             'email' => 'nullable|unique:users,email',
             // 'member_code'           => 'unique:leads,member_code',
-            'phone' => 'required_unless:minor,yes|min:11|max:11|unique:leads,phone',
-            'national' => 'nullable|nullable|min:14|max:14|unique:leads,national',
+            'phone' => 'required_unless:minor,yes|min:10|max:10|unique:leads,phone',
+            'national' => 'nullable|nullable|min:6|max:14|unique:leads,national',
             'name' => 'required',
             'status_id' => 'required',
             'source_id' => 'required',
@@ -381,7 +381,7 @@ class MembersController extends Controller
                 'address_details'   => $request['address_details'],
                 'whatsapp_number'   => $request['whatsapp_number'],
                 'notes'             => $request['notes'],
-                'branch_id'         => $selected_branch->id,
+                'branch_id'         => $selected_branch->id ?? $request['branch_id'],
                 'created_by_id'     => Auth()->user()->id,
                 'parent_phone'      => isset($request->minor) ? $request['parent_phone'] : null,
                 'parent_details'    => isset($request->minor) ? $request['parent_details'] : null,
@@ -411,7 +411,7 @@ class MembersController extends Controller
                 'service_fee'           => $request->membership_fee,
                 'net_amount'            => $request->membership_fee - $request->discount_amount,
                 'membership_id'         => $membership->id,
-                'branch_id'             => $selected_branch->id,
+                'branch_id'             => $selected_branch->id ?? $request['branch_id'],
                 'sales_by_id'           => $request->sales_by_id,
                 'status'                => ($request->membership_fee - $request->discount_amount) == $request->received_amount ? 'fullpayment' : 'partial',
                 'created_by_id'         => Auth()->user()->id,
@@ -519,7 +519,7 @@ class MembersController extends Controller
 
             DB::commit();
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            dd($e->getMessage(),$e);
             $this->something_wrong();
             return back();
         }
@@ -579,8 +579,8 @@ class MembersController extends Controller
     {
         $request->validate([
             "email" => "nullable|unique:users,email,$member->user_id",
-            "national" => "nullable|min:14|max:14|unique:leads,national,$member->id",
-            "phone" => "required_unless:minor,yes|min:11|max:11|unique:leads,phone,$member->id",
+            "national" => "nullable|min:6|max:14|unique:leads,national,$member->id",
+            "phone" => "required_unless:minor,yes|min:10|max:11|unique:leads,phone,$member->id",
             // 'member_code'       => "unique:leads,member_code,$member->member_code",
             'name' => 'required',
             'source_id' => 'required',
@@ -1046,8 +1046,8 @@ class MembersController extends Controller
 
         $request->validate([
             "email" => "nullable|unique:users,email,$member->user_id",
-            "national" => "nullable|min:14|max:14|unique:leads,national,$id",
-            "phone" => "required|min:11|max:11|unique:leads,phone,$id",
+            "national" => "nullable|min:6|max:14|unique:leads,national,$id",
+            "phone" => "required|min:10|max:11|unique:leads,phone,$id",
             'name' => 'required',
             // 'member_code'           => 'required|unique:leads,member_code',
             'status_id' => 'required',

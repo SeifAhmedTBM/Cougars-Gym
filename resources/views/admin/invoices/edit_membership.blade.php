@@ -151,7 +151,7 @@
                 <div class="input-group">
                     <input class="form-control {{ $errors->has('discount_amount') ? 'is-invalid' : '' }}" type="text" name="discount_amount" id="discount_amount" value="{{ $invoice->discount }}" required>
                     <div class="input-group-append">
-                        <span class="input-group-text">EGP</span>
+                        <span class="input-group-text">SAR</span>
                     </div>
                 </div>
                 @if ($errors->has('discount_amount'))

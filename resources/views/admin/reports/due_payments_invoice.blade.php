@@ -100,9 +100,9 @@
                                     </a>
                                 </td>
                                 <td>{{ $invoice->membership->service_pricelist->name ?? '-' }} </td>
-                                <td>{{ number_format($invoice->net_amount) ?? '-' }} EGP</td>
-                                <td>{{ number_format($invoice->payments_sum_amount) ?? '-' }} EGP</td>
-                                <td>{{ number_format($invoice->rest) ?? '-' }} EGP</td>
+                                <td>{{ number_format($invoice->net_amount) ?? '-' }} SAR</td>
+                                <td>{{ number_format($invoice->payments_sum_amount) ?? '-' }} SAR</td>
+                                <td>{{ number_format($invoice->rest) ?? '-' }} SAR</td>
                                 <td>{{ $invoice->created_at ?? '-' }}</td>
                                 <td>
                                     <div class="btn-group">

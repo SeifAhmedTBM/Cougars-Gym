@@ -50,7 +50,7 @@
                     <div class="col-md-3">
                         <label class="{{ config('domains')[config('app.url')]['national_id'] == true ? 'required' :''}}" for="national">{{ trans('cruds.member.fields.national') }}</label>
                         <input class="form-control {{ $errors->has('national') ? 'is-invalid' : '' }}" type="text"
-                            name="national" id="national" value="{{ old('national', $lead->national) }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="14" max="14" required' :''}}>
+                            name="national" id="national" value="{{ old('national', $lead->national) }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="6" max="14" required' :''}}>
                         @if ($errors->has('national'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('national') }}

@@ -83,23 +83,23 @@
             <tbody>
                 <tr>
                     <td class="font-weight-bold">{{ trans('global.basic_salary') }}</td>
-                    <td>{{ number_format($payroll->basic_salary) }} EGP</td>
+                    <td>{{ number_format($payroll->basic_salary) }} SAR</td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">{{ trans('global.deductions') }}</td>
-                    <td>{{ number_format($payroll->deduction) }}  EGP</td>
+                    <td>{{ number_format($payroll->deduction) }}  SAR</td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">{{ trans('cruds.bonu.title') }}</td>
-                    <td>{{ number_format($payroll->bonuses) }}  EGP</td>
+                    <td>{{ number_format($payroll->bonuses) }}  SAR</td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">{{ trans('global.loan_deduction') }}</td>
-                    <td>{{ number_format($payroll->loans) }}  EGP</td>
+                    <td>{{ number_format($payroll->loans) }}  SAR</td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold">{{ trans('global.bonuses') }}</td>
-                    <td>{{ number_format($payroll->bonus) }}  EGP</td>
+                    <td>{{ number_format($payroll->bonus) }}  SAR</td>
                 </tr>
                 <tr class="bg-secondary">
                     <td class="font-weight-bold text-white">{{ trans('global.net_salary') }}</td>

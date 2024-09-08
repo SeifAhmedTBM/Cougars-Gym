@@ -25,9 +25,9 @@
                 <tbody>
                     <tr>
                         <td>Ahmed</td>
-                        <td>3 Months/300 EGP</td>
-                        <td>300 EGP</td>
-                        <td>300 EGP</td>
+                        <td>3 Months/300 SAR</td>
+                        <td>300 SAR</td>
+                        <td>300 SAR</td>
                     </tr>
                 </tbody>
             </table>

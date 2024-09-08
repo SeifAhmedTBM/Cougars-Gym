@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body bg-success text-white text-center">
                 <div>
-                    <h5 class="fs-4 fw-semibold">{{ number_format($dailyPayments->sum('amount')) .' EGP' }}</h5>
+                    <h5 class="fs-4 fw-semibold">{{ number_format($dailyPayments->sum('amount')) .' SAR' }}</h5>
                     <h5><i class="fa-fw far fa-credit-card"></i> {{ trans('cruds.payment.title') }}</h5>
                 </div>
             </div>
@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-body bg-success text-white text-center">
                 <div>
-                    <h5 class="fs-4 fw-semibold">{{ number_format($payments->sum('amount')) .' EGP' }} </h5>
+                    <h5 class="fs-4 fw-semibold">{{ number_format($payments->sum('amount')) .' SAR' }} </h5>
                     <h5><i class="fa-fw far fa-credit-card"></i> {{ trans('global.monthly_payments') }}</h5>
                 </div>
             </div>

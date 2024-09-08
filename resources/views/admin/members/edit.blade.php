@@ -78,7 +78,7 @@
                     <div class="col-md-3">
                         <label class="{{ config('domains')[config('app.url')]['national_id'] == true ? 'required' :''}}" for="national">{{ trans('cruds.member.fields.national') }}</label>
                         <input class="form-control {{ $errors->has('national') ? 'is-invalid' : '' }}" type="text"
-                            name="national" id="national" value="{{ old('national', $member->national) }}" {{ config('domains')[config('app.url')]['national_id'] == true ? 'required' : '' }} oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="14" max="14" required' :''}} {{ !is_null($member->parent_phone) ? 'disabled' : '' }}>
+                            name="national" id="national" value="{{ old('national', $member->national) }}" {{ config('domains')[config('app.url')]['national_id'] == true ? 'required' : '' }} oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" {{ config('domains')[config('app.url')]['national_id'] == true ? 'min="6" max="14" required' :''}} {{ !is_null($member->parent_phone) ? 'disabled' : '' }}>
                             
                             @if ($errors->has('national'))
                                 <div class="invalid-feedback">
@@ -367,7 +367,7 @@
     @if (config('domains')[config('app.url')]['national_id'] == true)
         <script>
             $('#national').on('keyup',function(){
-                    if ($('#national').val().length == 14) {
+                    if ($('#national').val().length >= 6) {
                         $('#national').removeClass('is-invalid').addClass('is-valid');
                     }else{
                         $('#national').removeClass('is-valid').addClass('is-invalid');
@@ -375,7 +375,7 @@
                 })
 
                 $('#phone').on('keyup',function(){
-                    if ($('#phone').val().length == 11) {
+                    if ($('#phone').val().length == 10) {
                         $('#phone').removeClass('is-invalid').addClass('is-valid');
                     }else{
                         $('#phone').removeClass('is-valid').addClass('is-invalid');

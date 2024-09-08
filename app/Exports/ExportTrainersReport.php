@@ -41,11 +41,11 @@ class ExportTrainersReport implements FromCollection, WithHeadings
             $data->push([
                 'Name'                                  => $trainer_name,
                 'This month collected'                  => round($this->commission->where('trainer_id', $trainer_id)
-                                                                      ->first()['total']) . ' EGP',
-                'Previous month collected'              => (isset($pre_com) && $pre_com != NULL ? round($pre_com['pre_total']) : 0) . ' EGP',
-                'This month commission'                 => $this->commission->where('trainer_id', $trainer_id)->first()['commission'] != 0 ? round(intval($this->commission->where('trainer_id', $trainer_id)->first()['commission'])) . ' EGP' : '0 EGP ',
-                'Previous month commissions'            => isset($pre_com) && $pre_com != NULL ? round($pre_com['previous_months_commissions']) . ' EGP' : 0  . ' EGP',
-                'Total commissions'                     => (round(intval($this->commission->where('trainer_id', $trainer_id)->first()['commission'])) + (isset($pre_com['previous_months_commissions']) ? round($pre_com['previous_months_commissions']) : 0)) . ' EGP'
+                                                                      ->first()['total']) . ' SAR',
+                'Previous month collected'              => (isset($pre_com) && $pre_com != NULL ? round($pre_com['pre_total']) : 0) . ' SAR',
+                'This month commission'                 => $this->commission->where('trainer_id', $trainer_id)->first()['commission'] != 0 ? round(intval($this->commission->where('trainer_id', $trainer_id)->first()['commission'])) . ' SAR' : '0 SAR ',
+                'Previous month commissions'            => isset($pre_com) && $pre_com != NULL ? round($pre_com['previous_months_commissions']) . ' SAR' : 0  . ' SAR',
+                'Total commissions'                     => (round(intval($this->commission->where('trainer_id', $trainer_id)->first()['commission'])) + (isset($pre_com['previous_months_commissions']) ? round($pre_com['previous_months_commissions']) : 0)) . ' SAR'
             ]);
         }
 
