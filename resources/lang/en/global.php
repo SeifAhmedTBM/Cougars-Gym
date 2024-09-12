@@ -11,6 +11,7 @@ return [
     'delete'                         => 'Delete',
     'settings'                       => 'Settings',
     'menu_logo'                      => 'Menu logo',
+    'invoice_logo'                      => 'Invoice logo',
     'login_logo'                     => 'Login page logo',
     'invoice_header'                 => 'Invoice header',
     'right_section'                  => 'Right section',

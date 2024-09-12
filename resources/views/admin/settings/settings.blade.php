@@ -21,6 +21,15 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <a href="{{ isset($settings->invoice_logo) ?  asset('images/'.$settings->invoice_logo) : '' }}" target="_blank">
+                    <img src="{{ isset($settings->invoice_logo) ? asset('images/'.$settings->invoice_logo) : '' }}" alt="" width="100">
+                </a>
+                <div class="form-group">
+                    {!! Form::label('invoice_logo', trans('global.invoice_logo')) !!} <br>
+                    {!! Form::file('invoice_logo', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="col-md-4">
                 <a href="{{ isset($settings->login_logo) ?  asset('images/'.$settings->login_logo) : '' }}" target="_blank">
                     <img src="{{ isset($settings->login_logo) ? asset('images/'.$settings->login_logo) : '' }}" alt="" width="100">
                 </a>

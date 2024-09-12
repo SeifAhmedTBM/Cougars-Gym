@@ -198,7 +198,9 @@
     <!-- Invoice Information -->
     <div class="invoice-info">
         <div style="margin-top: -40px; display: flex; flex-direction: column;">
-            <img src="{{asset("images/cougarsInvoice.png")}}" style="width: 75%;" alt="Cougars Health Club Logo">
+            @if ($invoice['logo'])
+                <img src="{{ $invoice['logo'] }}" style="width: 75%;" alt="Cougars Health Club Logo" alt="logo" width="50">
+            @endif
             <div class="details">
                 <div class="box">
                     <h4>Cougars Health Club</h4>
