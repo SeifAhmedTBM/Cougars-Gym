@@ -54,6 +54,12 @@ class SettingController extends Controller
             $settings->login_logo = $name;
         }
 
+        if($file = $request->file('invoice_logo')) {
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $settings->invoice_logo = $name;
+        }
+
         if($file = $request->file('login_background')) {
             $name = $file->getClientOriginalName();
             $file->move('images', $name);
@@ -96,7 +102,7 @@ class SettingController extends Controller
         $settings->long                     = $request['long'];
         $settings->lat                      = $request['lat'];
         $settings->inactive_members_days    = $request['inactive_members_days'];
-        
+
         if($file = $request->file('menu_logo')) {
             $name = $file->getClientOriginalName();
             $file->move('images', $name);
@@ -107,7 +113,11 @@ class SettingController extends Controller
             $file->move('images', $name);
             $settings->login_logo = $name;
         }
-
+        if($file = $request->file('invoice_logo')) {
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $settings->invoice_logo = $name;
+        }
         if($file = $request->file('login_background')) {
             $name = $file->getClientOriginalName();
             $file->move('images', $name);

@@ -2,357 +2,314 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <title>Invoice</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Invoice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    {{-- <style type="text/css" media="screen">
-            html {
-                font-family: sans-serif;
-                line-height: 1.15;
-                margin: 0;
-                direction: rtl;
-            }
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
 
+        .container {
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        .header,
+        .footer {
+            display: flex;
+            justify-content: end;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin: 0;
+            color: #2d2d2d;
+        }
+
+        .header h2 {
+            font-size: 22px;
+            margin: 5px 0 20px 0;
+            color: #6B7280;
+        }
+
+        .invoice-info {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box {
+            margin: 30px 0;
+        }
+
+        .box h4 {
+            color: #353535;
+            font-size: 14px;
+        }
+
+        .box p {
+            color: #6b7280;
+        }
+
+        .box span {
+            color: #2d2f35;
+        }
+
+        .total-box {
+            margin: 20px 0;
+            font-size: 20px;
+        }
+
+        .total-box p span {
+            font-size: 40px;
+            color: #0f0f12;
+        }
+
+        .total-box p {
+            color: #6b7280;
+        }
+
+        .details {
+            width: 250px;
+            margin: 30px 0;
+            text-align: start;
+        }
+
+        .invoice-details {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            direction: ltr;
+        }
+
+        .invoice-details tr {
+            border-bottom: 1px solid #aeaeae;
+        }
+
+        .invoice-details th,
+        .invoice-details td {
+            padding: 8px;
+            text-align: start;
+            font-size: 14px;
+            color: #3c4048;
+        }
+
+        .invoice-details th span,
+        .invoice-details td span {
+            color: #7a7878;
+        }
+
+        .total-section {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .total-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .total-section th,
+        .total-section td {
+            padding: 8px;
+            text-align: right;
+        }
+
+        .total-section th {
+            font-weight: bold;
+        }
+
+        .total-section td:last-child {
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+        }
+
+        .qr-code {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            text-align: end;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            width: 100px;
+            height: 100px;
+        }
+        @page {
+            size: A3;
+            margin: 20mm;
+        }
+
+        @media print {
             body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-                font-weight: 400;
-                line-height: 1.5;
-                color: #212529;
-                text-align: left;
-                background-color: #fff;
-                font-size: 5px !important;
-                margin: 36pt;
+                width: auto;
+                height: auto;
             }
+        }
 
-            h4 {
-                margin-top: 0;
-                margin-bottom: 0.5rem;
-            }
-
-            p {
-                margin-top: 0;
-                margin-bottom: 1rem;
-            }
-
-            strong {
-                font-weight: bolder;
-            }
-
-            img {
-                vertical-align: middle;
-                border-style: none;
-                margin-bottom:20px !important;
-                display:block;
-            }
-
-            table {
-                border-collapse: collapse;
-            }
-
-            th {
-                text-align: inherit;
-            }
-
-            h4, .h4 {
-                margin-bottom: 0.5rem;
-                font-weight: 500;
-                line-height: 1.2;
-            }
-
-            h4, .h4 {
-                font-size: 1.5rem;
-            }
-
-            .table {
-                width: 100%;
-                margin-bottom: 1rem;
-                color: #212529;
-            }
-
-            .table th,
-            .table td {
-                padding: 0.75rem;
-                vertical-align: top;
-            }
-
-            .table.table-items td {
-                border-top: 1px solid #dee2e6;
-            }
-
-            .table thead th {
-                vertical-align: bottom;
-                border-bottom: 2px solid #dee2e6;
-            }
-
-            .mt-5 {
-                margin-top: 3rem !important;
-            }
-
-            .pr-0,
-            .px-0 {
-                padding-right: 0 !important;
-            }
-
-            .pl-0,
-            .px-0 {
-                padding-left: 0 !important;
-            }
-
-            .text-right {
-                text-align: right !important;
-            }
-
-            .text-center {
-                text-align: center !important;
-            }
-
-            .text-uppercase {
-                text-transform: uppercase !important;
-            }
-            * {
-                font-family: "DejaVu Sans";
-            }
-            body, h1, h2, h3, h4, h5, h6, table, th, tr, td, p, div {
-                line-height: 1.1;
-            }
-            .party-header {
-                font-size: 1.5rem;
-                font-weight: 400;
-            }
-            .total-amount {
-                font-size: 12px;
-                font-weight: 700;
-            }
-            .border-0 {
-                border: none !important;
-            }
-            .cool-gray {
-                color: #6B7280;
-            }
-            .flex-container {
-                display: flex;
-            }
-
-            .flex-child {
-                flex: 1;
-                border: 2px solid yellow;
-            }
-        </style> --}}
+    </style>
+    <script>
+        window.onload = function() {
+            window.print();
+        };
+    </script>
 </head>
 
 <body>
-    {{-- Header --}}
-    <div>
-        @if ($invoice['logo'])
-            <img src="{{ $invoice['logo'] }}" alt="logo" width="50">
-        @endif
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Tax Invoice</h1>
+            <h2 style="font-weight: lighter;">فــاتــورة ضــريبــية</h2>
+        </div>
     </div>
 
-    <table class="table" style="margin-bottom: 10px !important; text-align:center">
+    <!-- Invoice Information -->
+    <div class="invoice-info">
+        <div style="margin-top: -40px; display: flex; flex-direction: column;">
+            @if ($invoice['logo'])
+                <img src="{{ $invoice['logo'] }}" style="width: 75%;" alt="Cougars Health Club Logo" alt="logo" width="50">
+            @endif
+            <div class="details">
+                <div class="box">
+                    <h4>Cougars Health Club</h4>
+                    <p style="color: #4c525e;">Abdul Maqsud Khojah,, Al Rawdah<br> Jeddah 23435<br> Kingdom of Saudi
+                        Arabia</p>
+                    <p style="color: #4c525e; direction: ltr;text-align: end;">+966(12)263-0263</p>
+                    <p style="color: #4c525e;">VAT number</p>
+                    <p>رقم التسجيل الضريبي</p>
+                    <span>300246671500003</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="box">
+                <h4>Invoice number</h4>
+                <p>رقم الفاتورة</p>
+                <span>INV-{{ $invoice['invoice']->id }}</span>
+            </div>
+            <div class="box">
+                <h4>Date</h4>
+                <p>ألتاريخ</p>
+                <span>{{ date('Y-m-d') }}</span>
+            </div>
+            <div class="box">
+                <h4>Issue Date</h4>
+                <p>تاريخ الإصدار</p>
+                <span>{{ date('Y-m-d', strtotime($invoice['invoice']->created_at)) }}</span>
+            </div>
+        </div>
+        <div>
+            <div class="box">
+                <h4>Bill to</h4>
+                <p>العميل</p>
+                <span>{{ $invoice['buyer']->name }}</span>
+            </div>
+            <div class="box">
+                <h4>Kingdom of Saudi Arabia</h4>
+                <span>VAT number</span>
+                <p>رقم التسجيل الضريبي</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="total-box">
+        <h5>Total Due</h5>
+        <p>الرصيد المستحق</p>
+        <p style="color: #2f2f2f;"><span>{{ ($invoice['invoice']->net_amount + ($invoice['invoice']->net_amount * 0.15 )) - $invoice['invoice']->payments->sum('amount') }}</span> ر.س.SAR</p>
+    </div>
+
+    <!-- Invoice Details Table -->
+    <table class="invoice-details">
+        <thead>
+        <tr>
+            <th>Item / Description <br><span>الوصف  المنتج</span></th>
+            <th>Quantity <br><span>الكمية</span></th>
+            <th>Price <br><span>السعر</span></th>
+            <th>Taxable amount <br><span>المبلغ الخاضع للضريبة</span></th>
+            <th>VAT <br><span>القيمة المضافة</span></th>
+            <th>Amount <br><span>المجموع</span></th>
+        </tr>
+        </thead>
         <tbody>
+        @foreach ($invoice['items'] as $item)
+{{--            @dd($item)--}}
             <tr>
-                <td class="px-0">
-                    {!! $invoice['seller']->custom_fields !!}
-                </td>
-                <td style="margin-right:40px;">
-                    @if ($invoice['buyer']->address)
-                        <p class="buyer-address">
-                            {{ __('invoices::invoice.address') }}: {{ $invoice['buyer']->address }}
-                        </p>
-                    @endif
-
-                    @if ($invoice['buyer']->code)
-                        <p class="buyer-code">
-                            {{ __('invoices::invoice.code') }}: {{ $invoice['buyer']->code }}
-                        </p>
-                    @endif
-
-                    @if ($invoice['buyer']->vat)
-                        <p class="buyer-vat">
-                            {{ __('invoices::invoice.vat') }}: {{ $invoice['buyer']->vat }}
-                        </p>
-                    @endif
-
-                    @if ($invoice['buyer']->phone)
-                        <p class="buyer-phone">
-                            {{ __('invoices::invoice.phone') }}: {{ $invoice['buyer']->phone }}
-                        </p>
-                    @endif
-
-                    {!! $invoice['buyer']->custom_fields !!}
-                </td>
+                <td>{{$item['title']}}</td>
+                <td>1</td>
+                <td>{{$item['pricePerUnit']}}</td>
+                <td>{{$item['pricePerUnit']}}</td>
+                <td>{{$item['pricePerUnit'] * 0.15}} <br><span style="font-size:12px">15%</span></td>
+                <td>{{$item['pricePerUnit'] +($item['pricePerUnit']*0.15)}}</td>
             </tr>
+        @endforeach
         </tbody>
     </table>
 
-    <br> <br> <br>
-    <table class="table mt-5" border="1" style="padding:5px;margin-bottom:10px;text-align:center">
-        <thead>
-            <tr>
-                <th>Invoice Number</th>
-                <th>Invoice Date</th>
-                <th>Member Code</th>
-                <th>Member Name</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <td class="font-size:5px !important;">
-                    #{{ $invoice['invoice']->id }}
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ date('Y-m-d h:i A', strtotime($invoice['invoice']->created_at)) }}
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->membership->member->member_code }}
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->membership->member->name }}
-                </td>
-
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->status }}
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
-    <br> <br>
-    <table class="table mt-5" border="1" style="padding:5px;margin-bottom:10px;text-align:center">
-        <thead>
-            <tr>
-                <th>Service</th>
-                <th>Start - End </th>
-                <th>Sessions Count</th>
-                <th>Trainer </th>
-                <th>Sales By</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->membership->service_pricelist->name }}
-                </td>
-                <td class="font-size:5px !important;">
-
-                    {{ $invoice['invoice']->membership->start_date }}
-
-                    <br>
-
-                    {{ $invoice['invoice']->membership->end_date }}
-
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->membership->service_pricelist->session_count ?? '0' }}
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->membership->trainer->name ?? '-' }}
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->membership->sales_by->name ?? '-' }}
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
-    <br><br>
-    <table class="table mt-5" border="1" style="padding:5px;margin-bottom:10px;text-align:center">
-        <thead>
-            <tr>
-                <th>Price</th>
-                <th>Dicsount </th>
-                <th>Net Amount</th>
-                <th>Paid Amount </th>
-                <th>Rest</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->service_fee }} LE
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->discount }} LE
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->net_amount }} LE
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->payments->sum('amount') }} LE
-                </td>
-                <td class="font-size:5px !important;">
-                    {{ $invoice['invoice']->net_amount - $invoice['invoice']->payments->sum('amount') }} LE
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <br><br>
-    <table class="table table-items" border="1" style="padding:5px;margin-bottom:10px;text-align:center">
-        <thead>
-            <tr>
-                <th scope="col" class="text-right border-0">Date</th>
-                <th scope="col" class="text-right border-0">Amount</th>
-                <th scope="col" class="text-right border-0">Payment method</th>
-                <th scope="col" class="text-right border-0">Created by</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{-- Items --}}
-            @foreach ($invoice['invoice']->payments as $index => $payment)
+    <!-- Total Section -->
+    <div class="total-section">
+        <div class="right">
+            <table dir="ltr">
                 <tr>
-                    <td class="pl-0">
-                        {{ date('Y-m-d h:i A', strtotime($payment->created_at)) ?? '-' }}
-                    </td>
-                    <td class="text-right">
-                        {{ $payment->amount ?? '-' }}
-                    </td>
-                    <td class="text-right pr-0">
-                        {{ $payment->account->name ?? '-' }}
-                    </td>
-                    <td class="text-right pr-0">
-                        {{ $payment->created_by->name ?? '-' }}
-                    </td>
+                    <td>Subtotal <br> <span>المجموع الفرعي</span></td>
+                    <td>SAR .ر.س</td>
+                    <td>{{ $invoice['invoice']->net_amount}}</td>
                 </tr>
-            @endforeach
-
-        </tbody>
-    </table>
-    <br><br>
-    {{-- @if ($invoice['invoice']->membership->service_pricelist->serviceOptionsPricelist)
-        <table class="table mt-5" border="1" style="padding:5px;margin-bottom:10px;text-align:center">
-            <thead>
                 <tr>
-                    @foreach ($invoice['invoice']->membership->service_pricelist->serviceOptionsPricelist as $option)
-                        <th>{{ $option->service_option->name }}</th>
-                    @endforeach
+                    <td>Total VAT <br> <span>إجمالي ضريبة القيمة المضافة</span></td>
+                    <td>SAR .ر.س</td>
+                    <td>{{ $invoice['invoice']->net_amount * 0.15 }}</td>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
-                    @foreach ($invoice['invoice']->membership->service_pricelist->serviceOptionsPricelist as $option)
-                        <td class="font-size:5px !important;">
-                            {{ $option->service_option ? $option->count ?? '0' : '-' }}</td>
-                    @endforeach
+                    <td>Total <br> <span>الإجمالي</span></td>
+                    <td>SAR .ر.س</td>
+                    <td>{{ $invoice['invoice']->net_amount + ($invoice['invoice']->net_amount * 0.15 ) }}</td>
                 </tr>
-            </tbody>
-        </table>
-        <br>
-    @endif --}}
 
-    <br><br>
-    <table class="table table-items" style="padding:5px;margin-bottom:5px;text-align:right;">
-        <tbody>
-            <tr>
-                <td class="px-0">
-                    @if ($invoice['notes'])
-                        {!! $invoice['notes'] !!}
-                    @endif
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                <tr>
+                    <td>Paid amount <br> <span>المبلغ المدفوع</span></td>
+                    <td>SAR .ر.س</td>
+                    <td>{{ $invoice['invoice']->payments->sum('amount') }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="qr-code">
+            <img src="{{asset('images/QRcode.png')}}" alt="QR Code">
+            <p>This QR code is encoded as per ZATCA e-invoicing requirements<br>
+                رمز الاستجابة السريعة مشفر حسب متطلبات هيئة الزكاة والضريبة والجمارك للفوترة الإلكترونية</p>
+        </div>
+    </div>
+</div>
 </body>
-
 </html>

@@ -575,8 +575,7 @@ class InvoiceController extends Controller
     public function printInvoice(Request $request, $id)
     {
         $invoice = $this->invoice($id);
-
-        $text = view('vendor.invoices.templates.default', [
+        return view('vendor.invoices.templates.default', [
             'invoice'       => $invoice,
         ]);
 
@@ -676,13 +675,13 @@ class InvoiceController extends Controller
                 'discount'      => $db_invoice->discount
             ]
         ];
-
+//        dd(Setting::first()->invoice_logo);
         $invoice = [
             'seller'                => $client,
             'buyer'                 => $customer,
             'serial_number'         => $setting->invoice_prefix . $db_invoice->id,
             'date'                  => $db_invoice->created_at->toFormattedDateString(),
-            'logo'                  => public_path('images/' . Setting::first()->menu_logo),
+            'logo'                  => asset('images/' . Setting::first()->invoice_logo),
             'notes'                 => $invoice_tmp['footer'],
             'items'                 => $item
         ];
