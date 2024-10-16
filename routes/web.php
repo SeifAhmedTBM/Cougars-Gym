@@ -79,6 +79,48 @@ Route::get('update-membership-status', function () {
     return $memberships_data;
 });
 
+Route::get('update-memberships-status', function () {
+    $today = now()->format('Y-m-d');
+    $expiredCount = Membership::whereHas('service_pricelist.service.service_type', function ($q) {
+        $q->where('main_service', true);
+    })->whereDate('end_date', $today)
+        ->whereNotIn('status',['refunded','expired'])
+        ->update(['status' => 'expired']);
+
+    $currentCount = Membership::whereHas('service_pricelist.service.service_type', function ($q) {
+        $q->where('main_service', true);
+    })->whereDate('start_date', $today)
+        ->whereNotIn('status',['refunded','current'])
+        ->update(['status' => 'current']);
+
+    return response()->json([
+        'message' => 'Membership statuses updated successfully.',
+        'current_updated' => $currentCount,
+        'expired_updated' => $expiredCount,
+    ]);
+});
+
+Route::get('update-all-memberships-status', function () {
+    $today = now()->format('Y-m-d');
+    $currentCount = Membership::whereHas('service_pricelist.service.service_type', function ($q) {
+        $q->where('main_service', true);
+    })->whereDate('start_date','<=', $today)
+        ->whereDate('end_date','>', $today)
+        ->whereNotIn('status',['refunded','current'])
+        ->update(['status' => 'current']);
+
+    $expiredCount = Membership::whereHas('service_pricelist.service.service_type', function ($q) {
+        $q->where('main_service', true);
+    })->whereDate('end_date','<=', $today)
+        ->whereNotIn('status', ['refunded', 'expired'])
+        ->update(['status' => 'expired']);
+    return response()->json([
+        'message' => 'Membership statuses updated successfully.',
+        'expired_updated' => $expiredCount,
+        'current_updated' => $currentCount,
+    ]);
+});
+
 
 Route::get('update-trainer-attendants', function () {
 
@@ -143,6 +185,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Settings
     Route::resource('settings', 'SettingController');
+    Route::resource('mobile_settings', 'MobileSettingController');
 
     // Membership Schedule
     // Route::resource('membership-schedule', 'MembershipScheduleController');
@@ -296,6 +339,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('customer-invitation-report', 'ReportController@customerInvitation')->name('customer-invitation');
 
         Route::get('all-duepayments-report', 'ReportController@all_due_payments')->name('all-due-payments');
+        Route::get('sales-due-payments', 'ReportController@sales_due_payments')->name('sales_due_payments');
+        Route::get('trainer-due-payments', 'ReportController@trainer_due_payments')->name('trainer_due_payments');
+        Route::get('/trainers-by-branch', 'ReportController@getTrainersByBranch')->name('trainers.by.branch');
+        Route::get('/get-sales-by-branch', 'ReportController@getSalesByBranch')->name('get.sales.by.branch');
+
 
         Route::get('daily-task-report', 'ReportController@daily_task_report')->name('daily-task-report');
 
@@ -418,6 +466,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('services/parse-csv-import', 'ServicesController@parseCsvImport')->name('services.parseCsvImport');
     Route::post('services/process-csv-import', 'ServicesController@processCsvImport')->name('services.processCsvImport');
     Route::resource('services', 'ServicesController');
+    Route::post('services/media', 'ServicesController@storeMedia')->name('services.storeMedia');
+
 
     // Pricelist
     Route::delete('pricelists/destroy', 'PricelistController@massDestroy')->name('pricelists.massDestroy');
@@ -580,6 +630,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('expenses/parse-csv-import', 'ExpensesController@parseCsvImport')->name('expenses.parseCsvImport');
     Route::post('expenses/process-csv-import', 'ExpensesController@processCsvImport')->name('expenses.processCsvImport');
     Route::resource('expenses', 'ExpensesController');
+    Route::get('expenses_categories', 'ExpensesController@expenses_categories')->name('expenses_categories');
+    Route::get('expenses_categories_show_by_filter' ,'ExpensesController@expenses_categories_show_by_filter')->name('expenses_categories_show_by_filter');
+
 
     // Invoice
     Route::delete('invoices/destroy', 'InvoiceController@massDestroy')->name('invoices.massDestroy');
@@ -615,6 +668,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('payment-invoice/{id}', 'InvoiceController@payment')->name('invoice.payment');
     Route::post('payment-invoice/{id}', 'InvoiceController@storePayment')->name('invoice.storePayment');
+    Route::get('paymentDuePayments-invoice/{id}', 'InvoiceController@paymentDuePayments')->name('invoice.paymentDuePayments');
 
     // Payment
     Route::delete('payments/destroy', 'PaymentController@massDestroy')->name('payments.massDestroy');
@@ -629,6 +683,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('employees/parse-csv-import', 'EmployeesController@parseCsvImport')->name('employees.parseCsvImport');
     Route::post('employees/process-csv-import', 'EmployeesController@processCsvImport')->name('employees.processCsvImport');
     Route::resource('employees', 'EmployeesController');
+    Route::post('employees/media', 'EmployeesController@storeMedia')->name('employees.storeMedia');
 
     Route::get('transfer-sales-data', 'EmployeesController@transferSalesData')->name('transfer_sales_data.index');
     Route::post('transfer-sales-data', 'EmployeesController@storeTransferSalesData')->name('transfer_sales_data.store');
@@ -641,6 +696,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('add-document/{id}', 'EmployeesController@add_document')->name('employees.add_document');
 
     Route::put('employee/{id}/change-status', 'EmployeesController@change_status')->name('employees.change_status');
+    Route::put('employee/{id}/change-mobile-status', 'EmployeesController@change_mobile_status')->name('employees.change_mobile_status');
 
 
     // Employee attendances
@@ -963,6 +1019,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('products', 'ProductsController');
     Route::get('products/transactions/{id}', 'ProductsController@transactions')->name('product.transactions');
 
+
     // Warehouse Products
     Route::delete('warehouse-products/destroy', 'WarehouseProductsController@massDestroy')->name('warehouse-products.massDestroy');
     Route::resource('warehouse-products', 'WarehouseProductsController');
@@ -989,6 +1046,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // zoom 
     Route::resource('zoom','Marketing\ZoomController');
     Route::put('zoom-end/{meeting_id}','Marketing\ZoomController@end_meeting')->name('zoom.end');
+
+
+    //Free Pt Requests
+    Route::resource('free-requests', 'FreePtRequestsController');
+    Route::post('assign_free_pt_coaches' , 'FreePtRequestsController@assign_free_pt_coache')->name('assign_free_pt_coache');
+
+    //Notification
+    Route::resource('notification' , 'NotificationController');
+    Route::post('sendNotification' , 'NotificationController@sendNotification')->name('sendNotification');
+
+
+    //Paymon Controller 
+    Route::resource('paymobTransactions', 'PaymobTransactionsController');
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

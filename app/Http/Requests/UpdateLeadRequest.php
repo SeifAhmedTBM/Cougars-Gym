@@ -25,12 +25,12 @@ class UpdateLeadRequest extends FormRequest
                 'nullable',
                 'required',
                 'min:10',
-                'max:11'
+                'max:10'
             ],
             'national' => [
                 'nullable',
-                'min:6',
-                'max:14'
+                'min:10',
+                'max:10'
             ],
             'status_id' => [
                 'required',

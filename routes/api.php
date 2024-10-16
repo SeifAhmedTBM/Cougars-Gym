@@ -7,10 +7,11 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function() {
     Route::post('sendOtp', 'AuthController@sendOtp');
     Route::post('logout', 'AuthController@logout');
     Route::get('profile', 'AuthController@profile');
+    Route::post('profile', 'AuthController@updateProfile');
+    Route::post('updateImage', 'AuthController@updateImage');
     Route::get('getMemberhips', 'AuthController@getMemberships');
     Route::get('trainers', 'AuthController@trainers');
     Route::get('currentTrainer', 'AuthController@currentTrainer');
-    Route::post('updateImage', 'AuthController@updateImage');
     Route::get('contact','AuthController@contact');
     Route::apiResource('leads', 'V1\Admin\LeadsApiController');
     Route::get('privacy','AuthController@privacy');
@@ -46,7 +47,31 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
     Route::apiResource('service-types', 'ServiceTypesApiController');
 
     // Services
-    Route::apiResource('services', 'ServicesApiController');
+
+    Route::get('info/privacy/', 'InformationApiController@privacy');
+    Route::get('info/about-us/', 'InformationApiController@about_us');
+    Route::get('info/rules/', 'InformationApiController@rules');
+    Route::get('info/terms-conditions/', 'InformationApiController@terms_conditions');
+    Route::get('info/contact-us/', 'InformationApiController@contact_us');
+
+    Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
+        Route::apiResource('', 'ServicesApiController');
+        Route::get('pt/pricelist', 'PTServicesApiController@pricelist');
+        Route::get('pt/trainers', 'PTServicesApiController@trainers');
+        Route::get('/pt', 'PTServicesApiController@trainers_pricelist');
+        Route::get('classes/pricelist', 'ClassesServicesApiController@pricelist');
+        Route::get('classes/', 'ClassesServicesApiController@classes');
+        Route::get('classes/current', 'ClassesServicesApiController@my_classes');
+        Route::post('attendance', 'ServicesApiController@takeAttend');
+
+        Route::get('memberships/current', 'MembershipsServicesApiController@my_membership');
+        Route::get('memberships', 'MembershipsServicesApiController@memberships');
+        Route::post('subscription', 'SubscriptionApiController@subscribe');
+        Route::post('subscription/guest', 'SubscriptionApiController@guest_subscribe');
+        Route::post('subscribtion/validation' ,'SubscriptionApiController@validate_user');
+    });
+
+
 
     // Pricelist
     Route::apiResource('pricelists', 'PricelistApiController');
@@ -59,6 +84,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
 
     // Memberships
     Route::apiResource('memberships', 'MembershipsApiController');
+
+    Route::middleware('auth:sanctum')->get('member_ship_statistics' , 'MembershipsApiController@member_ship_statistics');
+
+    Route::middleware('auth:sanctum')->get('get_pt_memberships' , 'MembershipsApiController@get_pt_memberships');
 
     // Locker
     Route::apiResource('lockers', 'LockerApiController');
@@ -100,6 +129,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
     // Hotdeals
     Route::post('hotdeals/media', 'HotdealsApiController@storeMedia')->name('hotdeals.storeMedia');
     Route::apiResource('hotdeals', 'HotdealsApiController');
+    Route::post('all-hotdeals', 'HotdealsApiController@index');
 
     // Gallery Section
     Route::apiResource('gallery-sections', 'GallerySectionApiController');
@@ -154,8 +184,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
     Route::apiResource('service-options-pricelists', 'ServiceOptionsPricelistApiController');
 
     // Freeze Request
-    Route::apiResource('freeze-requests', 'FreezeRequestApiController');
-
+    Route::middleware('auth:sanctum')->apiResource('freeze-requests', 'FreezeRequestApiController');
+    Route::middleware('auth:sanctum')->post('/create_freeze_request', 'FreezeRequestApiController@store');
     // Refund Reasons
     Route::apiResource('refund-reasons', 'RefundReasonsApiController');
 
@@ -168,6 +198,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
     // External Payment
     Route::apiResource('external-payments', 'ExternalPaymentApiController');
 
+    
     // Withdrawal
     Route::apiResource('withdrawals', 'WithdrawalApiController');
 
@@ -179,11 +210,14 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
     Route::apiResource('session-lists', 'SessionListApiController');
 
     // Schedule
-    Route::apiResource('schedules', 'ScheduleApiController');
+    Route::middleware('auth:sanctum')->apiResource('schedules', 'ScheduleApiController');
+    Route::middleware('auth:sanctum')->post('attend_session' , 'ScheduleApiController@attend_session');
+    
+
 
     // Ratings
-    Route::apiResource('rate', 'RatingsApiController');
-
+    Route::apiResource('rate', 'RatingsApiController')->middleware('auth:sanctum');
+ 
     // Reasons
     Route::post('reasons/media', 'ReasonsApiController@storeMedia')->name('reasons.storeMedia');
     Route::apiResource('reasons', 'ReasonsApiController');
@@ -199,4 +233,20 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin'], 
 
     // Master Card
     Route::apiResource('master-cards', 'MasterCardApiController');
+
+
+    // Free Private Trainer Requests
+    
+
+    Route::middleware('auth:sanctum')->get('requestPrivateTrainer' , 'FreePtRequestsController@Request_free_pt');
+    Route::middleware('auth:sanctum')->get('available_free_pt' , 'FreePtRequestsController@free_pt');
+
+
+    Route::middleware('auth:sanctum')->post('takeManualAttend' ,'AttendanceAPIController@takeManualAttend');
+
+    Route::middleware('auth:sanctum')->apiResource('notifications' ,'NotificationController');
+    Route::middleware('auth:sanctum')->get('clearUserNotifications' , 'NotificationController@clearUSerNotifications');
+    
+    Route::middleware('auth:sanctum')->post('takePtAttend', 'AttendanceAPIController@takePtAttend');
 });
+ 

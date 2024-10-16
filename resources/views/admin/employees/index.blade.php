@@ -18,6 +18,7 @@
                         'branch_id'     => ['label' => 'Branch', 'type' => 'select', 'data' => $branches],
                         'job_status'    => ['label' => 'Job Status', 'type' => 'select' , 'data' => \App\Models\Employee::JOB_STATUS_SELECT],
                         'status'        => ['label' => 'Status', 'type' => 'select' , 'data' => \App\Models\Employee::STATUS_SELECT],
+                        'mobile_visibility'        => ['label' => 'Mobile Status', 'type' => 'select' , 'data' => \App\Models\Employee::MOBILE_STATUS_SELECT],
                         'created_at'    => ['label' => 'Created at', 'type' => 'date', 'from_and_to' => true]
                     ],
                         'route' => 'admin.employees.index'
@@ -52,6 +53,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.employee.fields.order') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.employee.fields.photo') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.name') }}
@@ -134,7 +138,7 @@
                 retrieve: true,
                 searching:true,
                 aaSorting: [],
-                ajax: "{{ route('admin.employees.index',request()->all()) }}",
+                ajax: "{!! route('admin.employees.index',request()->all()) !!}",
                 columns: [{
                         data: 'placeholder',
                         name: 'placeholder'
@@ -142,6 +146,11 @@
                     {
                         data: 'id',
                         name: 'id'
+                    },
+                    {
+                        data: 'photo',
+                        name: 'photo',
+                        'searchable': false
                     },
                     {
                         data: 'employee_name',

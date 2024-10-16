@@ -7,6 +7,7 @@ use App\Models\Branch;
 use App\Models\Status;
 use App\Models\Service;
 use App\Models\Pricelist;
+use App\Models\MobileSetting;
 use Illuminate\Http\Request;
 use App\Models\PricelistDays;
 use App\Models\ServiceOption;
@@ -111,6 +112,7 @@ class PricelistController extends Controller
 
     public function create($id)
     {
+        
         abort_if(Gate::denies('pricelist_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $service = Service::findOrFail($id);
@@ -118,10 +120,10 @@ class PricelistController extends Controller
         $services = Service::whereStatus('active')->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
         
         $branches = Branch::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
+        $class_service_id = MobileSetting::all()->first()->classes_service_type;
         $serviceOptions = ServiceOption::get();
 
-        return view('admin.pricelists.create', compact('services','serviceOptions','branches','service'));
+        return view('admin.pricelists.create', compact('services','serviceOptions','branches','service','class_service_id'));
     }
 
     public function store(StorePricelistRequest $request)
@@ -139,6 +141,7 @@ class PricelistController extends Controller
             'expiring_session'  => $request['expiring_session'],
             'session_count'     => $request['session_count'],
             'freeze_count'      => $request['freeze_count'],
+            'max_count'      => $request['max_count'] ?? null,
             'followup_date'     => $request['followup_date'],
             'main_service'      => isset($request['main_service']) ? true : false,
             'full_day'          => isset($request['full_day']) == 'true' ? 'true' : 'false',
@@ -181,10 +184,11 @@ class PricelistController extends Controller
         $serviceOptions = ServiceOption::get();
         
         $pricelist->load(['service','serviceOptionsPricelist','pricelist_days'])->loadCount('pricelist_days');
+        $class_service_id = MobileSetting::all()->first()->classes_service_type;
 
         $branches = Branch::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.pricelists.edit', compact('services', 'pricelist','serviceOptions','branches'));
+        return view('admin.pricelists.edit', compact('services', 'pricelist','serviceOptions','branches','class_service_id'));
     }
 
     public function update(UpdatePricelistRequest $request, Pricelist $pricelist)
@@ -202,6 +206,7 @@ class PricelistController extends Controller
             'expiring_date'     => $request['expiring_date'],
             'expiring_session'  => $request['expiring_session'],
             'session_count'     => $request['session_count'],
+            'max_count'      => $request['max_count'] ?? null,
             'freeze_count'      => $request['freeze_count'],
             'followup_date'     => $request['followup_date'],
             'main_service'      => isset($request['main_service']) ? true : false,

@@ -215,15 +215,23 @@ class LeadsController extends Controller
 
         $trainers = User::whereRelation('roles', 'title', 'Trainer')->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+        $selectedBranch = isset(Auth::user()->employee) ? Auth::user()->employee->branch_id : NULL;
+
         $sales_bies = User::whereHas('roles', function ($q) {
             $q->where('title', 'Sales');
         })->whereHas('employee', function ($i) {
             $i->whereStatus('active');
-        })->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        });
+
+        if ($selectedBranch) {
+            $sales_bies->whereHas('employee', fn($i) =>
+            $i->whereHas('branch', fn($x) =>
+            $x->where('id', $selectedBranch)));
+        }
+
+        $sales_bies = $sales_bies->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $sports = Sport::pluck('name', 'id');
-
-        $selectedBranch = isset(Auth::user()->employee) ? Auth::user()->employee->branch_id : NULL;
 
         return view('admin.leads.create', compact('statuses', 'sources', 'sales_bies', 'addresses', 'branches', 'selectedBranch', 'sports', 'trainers'));
     }
@@ -232,7 +240,7 @@ class LeadsController extends Controller
     {
         $request->validate([
             'name'                 => 'string|required',
-            'phone'                => 'string|required_unless:minor,yes|min:10|max:11|unique:leads,phone,NULL,id,deleted_at,NULL',
+            'phone'                => 'string|required_unless:minor,yes|min:10|max:10|unique:leads,phone,NULL,id,deleted_at,NULL',
             'source_id'            => 'required',
             'gender'               => 'required',
             'sales_by_id'          => 'required',
@@ -321,9 +329,9 @@ class LeadsController extends Controller
     {
         $request->validate([
             "name"                 => "string|required",
-            "phone"                => "required_unless:minor,yes|min:10|max:11|unique:leads,phone,$lead->id",
-            // "national"             => "string|required_unless:minor,yes|min:14|max:14|unique:leads,national,$lead->id",
-            // "national"             => "nullable|min:14|max:14|unique:leads,national,$lead->id",
+            "phone"                => "required_unless:minor,yes|min:10|max:10|unique:leads,phone,$lead->id",
+            // "national"             => "string|required_unless:minor,yes|min:10|max:10|unique:leads,national,$lead->id",
+            // "national"             => "nullable|min:10|max:10|unique:leads,national,$lead->id",
             "branch_id"            => "required",
             "source_id"            => "required",
             "gender"               => "required",

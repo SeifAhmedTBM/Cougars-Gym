@@ -116,7 +116,7 @@
                             @endcan
                             @can('view_expired_memberships_attendances')
                                 <li>
-                                    <a href="{{ route('admin.reports.expired-membership-attendances') }}">{{ trans('global.exp_attendances') }}</a> 
+                                    <a href="{{ route('admin.reports.expired-membership-attendances') }}">{{ trans('global.exp_attendances') }}</a>
                                 </li>
                             @endcan --}}
                             </ul>
@@ -127,9 +127,8 @@
                             <ul class="list-unstyled mt-3">
                                 <li>
                                     <a href="{{ route('admin.reports.sales-daily-report') }}">
-                                        Daily Sales Report
+                                        Sales Branch Report
                                     </a>
-                                    <span class="badge badge-danger">NEW</span>
                                 </li>
                                 @can('view_sales_report')
                                     <li>
@@ -139,9 +138,8 @@
                                 @endcan
                                 @can('view_sales_report')
                                     <li>
-                                        <a href="{{ route('admin.reports.previous-month-reports') }}">{{ trans('global.previous_month_report') }}
+                                        <a href="{{ route('admin.reports.previous-month-reports') }}">{{ trans('global.analysis_report') }}
                                         </a>
-                                        <span class="badge badge-danger">NEW</span>
                                     </li>
                                 @endcan
                                 @can('view_guest_log_report')
@@ -152,7 +150,7 @@
 
                                 @can('view_daily_task_report')
                                     <li>
-                                        <a href="{{ route('admin.reports.daily-task-report') }}">Daily Task Report</a>
+                                        <a href="{{ route('admin.reports.daily-task-report') }}">Sales Task Report</a>
                                     </li>
                                 @endcan
 
@@ -174,7 +172,7 @@
                                             href="{{ route('admin.reports.reminders.action') }}">{{ trans('global.reminders_action_report') }}</a>
                                     </li>
                                 @endcan
-                                
+
                                 {{-- <li>
                                     <a href="{{ route('admin.reports.revenue') }}">{{ trans('global.revenue') }}</a>
                                 </li> --}}
@@ -195,11 +193,11 @@
                             @endcan
                             @can('view_current_memberships_report')
                                 <li>
-                                    <a href="{{ route('admin.reports.current-memberships') }}">{{ trans('global.current_memberships') }}</a> 
+                                    <a href="{{ route('admin.reports.current-memberships') }}">{{ trans('global.current_memberships') }}</a>
                                 </li>
                             @endcan
                             <li>
-                                <a href="{{ route('admin.reports.trainerCommissions.report') }}">{{ trans('global.trainer_commissions') }}</a> 
+                                <a href="{{ route('admin.reports.trainerCommissions.report') }}">{{ trans('global.trainer_commissions') }}</a>
                             </li> --}}
 
                             </ul>
@@ -265,7 +263,22 @@
                                     <li>
                                         <a href="{{ route('admin.reports.all-due-payments') }}">All Due Payments</a>
                                     </li>
+
                                 @endcan
+
+                                    @can('view_sales_report')
+                                        <li>
+                                            <a href="{{ route('admin.reports.sales_due_payments') }}">Sales Due Payments</a>
+
+                                        </li>
+                                    @endcan
+                                    @can('due_payments_report')
+
+                                        <li>
+                                            <a href="{{ route('admin.reports.trainer_due_payments') }}">Trainer Due Payments</a>
+                                        </li>
+                                    @endcan
+
                                 {{-- @can('refund_access')
                                 <li>
                                     <a href="{{ route('admin.refunds.index') }}">{{ trans('cruds.refund.title') }}</a>
@@ -289,7 +302,7 @@
                                         <a href="{{ route('admin.reports.tax-accountant') }}">Tax Accountant</a>
                                     </li>
                                 @endcan
-                                {{-- 
+                                {{--
                                 <li>
                                     <a href="{{ route('admin.reports.assigned-coaches.report') }}">Assigned Coaches </a>
                                 </li>
@@ -297,11 +310,11 @@
                                 <li>
                                     <a href="{{ route('admin.reports.sessions-revenue') }}">Sessions Revenue ( Heat map ) </a>
                                 </li> --}}
-                                {{-- @can('expense_access')
-                                <li>
-                                    <a href="{{ route('admin.expenses.index') }}">{{ trans('cruds.expense.title') }}</a>
-                                </li>
-                            @endcan --}}
+                                @can('expense_access')
+                                    <li>
+                                        <a href="{{ route('admin.expenses_categories') }}">Expenses Categories</a>
+                                    </li>
+                                @endcan 
                             </ul>
                         </div>
 
@@ -311,9 +324,8 @@
                                 @can('view_daily_trainer_report')
                                     <li>
                                         <a href="{{ route('admin.reports.trainer-daily-report') }}">
-                                            Daily Trainer Report
+                                            Branch Trainer Report
                                         </a>
-                                        <span class="badge badge-danger">NEW</span>
                                     </li>
                                 @endcan
 
@@ -322,7 +334,6 @@
                                         <a href="{{ route('admin.reports.fitness-manager-report') }}">
                                             Fitness Managers Report
                                         </a>
-                                        <span class="badge badge-danger">NEW</span>
                                     </li>
                                 @endcan
 
@@ -369,12 +380,13 @@
                                         <a href="{{ route('admin.reports.pt-attendances-report') }}">
                                             PT Attendances Report
                                         </a>
-                                        <span class="badge badge-danger">NEW</span>
                                     </li>
                                 @endcan
                             </ul>
                         </div>
                     </div>
+
+                    
 
                 </div>
             </div>

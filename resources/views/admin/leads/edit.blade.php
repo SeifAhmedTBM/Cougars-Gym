@@ -64,7 +64,7 @@
                         <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text"
                             name="phone" id="phone" value="{{ old('phone', $lead->phone) }}" required
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            min="10" max="11" {{ !is_null($lead->parent_phone) ? 'disabled' : '' }}>
+                            min="10" max="10" {{ !is_null($lead->parent_phone) ? 'disabled' : '' }}>
                         @if ($errors->has('phone'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('phone') }}

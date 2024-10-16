@@ -58,8 +58,12 @@ class AttendanceController extends Controller
                                         ])
                                         ->latest()
                                     ])
-                            ->where('member_code',$request['membership_id'])
-                            ->orWhere('card_number',$request['membership_id'])
+                            ->where('branch_id',$request['member_branch_id'])
+                            ->where(function($q) use ($request){
+
+                                return $q->where('member_code',$request['membership_id'])
+                                ->orWhere('card_number',$request['membership_id']);
+                            })
                             ->firstOr(function(){
                                     session()->flash('user_invalid', trans('global.member_is_not_found'));
                                     return back();
@@ -103,30 +107,35 @@ class AttendanceController extends Controller
                 ->first(); 
             }
             
-            $active_memberships = $member->memberships()->whereNotIn('status',['expired','refunded'])->orderBy('start_date','asc')->get();
-            $group_session_flag = 0;
-            $sessions_flag = 0;
-            $non_sessions_flag = 0;
-            $membership_array = [];
-            foreach($active_memberships as $active_membership){
-                if($active_membership->service_pricelist->service->service_type->session_type == 'non_sessions'){
-                    if($non_sessions_flag == 0){
-                        array_push($membership_array,$active_membership->id);
-                        $non_sessions_flag = 1;
-                    }
-                }elseif($active_membership->service_pricelist->service->service_type->session_type == 'group_sessions'){
-                    if($group_session_flag == 0){
-                        array_push($membership_array,$active_membership->id);
-                        $group_session_flag = 1;
-                    }
-                }else{
-                    if($sessions_flag == 0){
-                        array_push($membership_array,$active_membership->id);
-                        $sessions_flag = 1;
-                    }
-                }  
-            }
-            $active_memberships = Membership::whereIn('id',$membership_array)->get();
+            $active_memberships = $member->memberships()
+                ->whereNotIn('status',['expired','refunded'])
+                ->orderBy('start_date','asc')->get();
+
+
+
+            // $group_session_flag = 0;
+            // $sessions_flag = 0;
+            // $non_sessions_flag = 0;
+            // $membership_array = [];
+            // foreach($active_memberships as $active_membership){
+            //     if($active_membership->service_pricelist->service->service_type->session_type == 'non_sessions'){
+            //         if($non_sessions_flag == 0){
+            //             array_push($membership_array,$active_membership->id);
+            //             $non_sessions_flag = 1;
+            //         }
+            //     }elseif($active_membership->service_pricelist->service->service_type->session_type == 'group_sessions'){
+            //         if($group_session_flag == 0){
+            //             array_push($membership_array,$active_membership->id);
+            //             $group_session_flag = 1;
+            //         }
+            //     }else{
+            //         if($sessions_flag == 0){
+            //             array_push($membership_array,$active_membership->id);
+            //             $sessions_flag = 1;
+            //         }
+            //     }  
+            // }
+            // $active_memberships = Membership::whereIn('id',$membership_array)->get();
 
             $last_note = $member->notes()->latest()->first();
 
@@ -469,7 +478,7 @@ class AttendanceController extends Controller
                                 
                                 if ($freeze_request) {
                                     
-                                    if ($setting->freeze_duration == 'days') 
+                                    if ($setting->freeze_duration == 'days')
                                     {
                                         $freeze_request_end_date = Carbon::parse($freeze_request->end_date); // end date of freeze request
                                         $now = Carbon::now()->format('Y-m-d');  // today 
@@ -481,6 +490,8 @@ class AttendanceController extends Controller
                                         $freeze_request->update([
                                             'end_date'  => date('Y-m-d', strtotime($freeze_request->end_date. ' -' . $freeze_request_end_date->diffInDays($now) . ' Days')),
                                             'freeze'    => $freeze_request->freeze - $freeze_request_end_date->diffInDays($now),
+                                            'status'    => 'expired'
+
                                         ]);
                                         
                                     }else{
@@ -498,6 +509,7 @@ class AttendanceController extends Controller
                                         $freeze_request->update([
                                             'end_date'  => date('Y-m-d', strtotime($freeze_request->end_date. ' -' . $deducted_days . ' Days')),
                                             'freeze'    => ceil($consumed/7),
+                                            'status'    => 'expired'
                                         ]);
                                     }
                                 }
@@ -656,15 +668,15 @@ class AttendanceController extends Controller
     {
         $membership = Membership::whereHas('member')->with('member')->whereId($request->membership_id)->first();
         $sales_by_id = $membership->member->sales_by_id;
+        $lead_id = $request->lead_id??'';
         if (is_null($request['lead_id'])) {
                 $request->validate([
                     'name'                  => 'required',
-                    'phone'                 => 'min:10|max:11|unique:leads,phone',
+                    'phone'                 => 'min:10|max:10|unique:leads,phone',
                     'gender'                => 'required',
                     'branch_id'             => 'required',
                     // 'sales_by_id'           => 'required',
                 ]);
-
                 $lead = Lead::create([
                     'name'              => $request['name'],
                     'phone'             => $request['phone'],
@@ -674,23 +686,17 @@ class AttendanceController extends Controller
                     'type'              => 'lead',
                     'source_id'         => Source::whereName('invitation')->first()->id ?? Source::firstOrCreate(['name' => 'invitation'])->id,
                 ]);
-
-                $invitation = Invitation::create([
-                    'member_id'         => $membership->member->id,
-                    'lead_id'           => $lead->id,
-                    'membership_id'     => $request['membership_id']
-                ]);
-        }else{
-            $invitation = Invitation::create([
-                'member_id'             => $membership->member->id,
-                'lead_id'               => $request['lead_id'],
-                'membership_id'         => $request['membership_id']
-            ]);
+                $lead_id = $lead->id;
         }
+        $invitation = Invitation::create([
+            'member_id'             => $membership->member->id,
+            'lead_id'               => $lead_id,
+            'membership_id'         => $request['membership_id']
+        ]);
 
         $reminder = Reminder::create([
             'type'              => 'sales',
-            'lead_id'           => $lead->id,
+            'lead_id'           => $lead_id ,
             'due_date'          => $request['followup'],
             'user_id'           => $sales_by_id,
         ]);
@@ -732,6 +738,7 @@ class AttendanceController extends Controller
 
     public function takeManualAttend(Request $request,$id)
     {
+        
         $membership = Membership::with('attendances')->findOrFail($id);
 
         $last_attend    = $membership->attendances()->whereDate('created_at',date('Y-m-d'))->latest()->first();
@@ -753,7 +760,8 @@ class AttendanceController extends Controller
                     'membership_status' => $membership->status
                 ]);
             }
-        }else{
+        }
+        else{
             $attend = MembershipAttendance::create([
                 'sign_in'                   => $request['time'],
                 'sign_out'                  => $request['time'],

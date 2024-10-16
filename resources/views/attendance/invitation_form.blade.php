@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="phone" class="required">{{ trans('cruds.lead.fields.phone') }}</label>
                                 <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="text"
-                                    name="phone" id="phone" value="{{ old('phone', '') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" min="10" max="11">
+                                    name="phone" id="phone" value="{{ old('phone', '') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" min="10" max="10">
                                 @if ($errors->has('phone'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('phone') }}

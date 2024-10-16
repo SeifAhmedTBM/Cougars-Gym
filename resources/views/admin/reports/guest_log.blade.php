@@ -6,7 +6,7 @@
                 <input type="date" value="{{ request('from') ?? date('Y-m-01') }}" name="from" class="form-control">
                 <input type="date" value="{{ request('to') ?? date('Y-m-t') }}" name="to" class="form-control">
                 <select name="branch_id" id="branch_id" class="form-control" {{ $employee && $employee->branch_id != NULL ? 'readonly' : '' }}>
-                    <option value="{{ NULL }}" selected>Branch</option>
+                    <option value="{{ NULL }}" selected>All Branches</option>
                     @foreach (\App\Models\Branch::pluck('name','id') as $id => $name)
                         <option value="{{ $id }}" {{ $branch_id == $id ? 'selected' : '' }}>{{ $name }}</option>
                     @endforeach
@@ -21,7 +21,7 @@
                 </select>
                 <select name="sales_by_id" id="sales_by_id" class="form-control">
                     <option value="{{ NULL }}" selected>Select Sales By</option>
-                    @foreach (\App\Models\User::whereRelation('roles','title','Sales')->pluck('name','id') as $sales_by_id => $sales_by_name)
+                    @foreach (\App\Models\User::whereRelation('roles','title','Sales')->whereRelation('employee','status','active')->pluck('name','id') as $sales_by_id => $sales_by_name)
                         <option value="{{ $sales_by_id }}" {{ request('sales_by_id') == $sales_by_id ? 'selected' : '' }}>{{ $sales_by_name }}</option>
                     @endforeach
                 </select>
@@ -117,7 +117,7 @@
                                                             </td>
                                                         </tr>
                                                     @empty
-                                                        NOT FOUND 
+                                                        NOT FOUND
                                                     @endforelse
                                                 </tbody>
                                             </table>

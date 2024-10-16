@@ -25,14 +25,14 @@ class StoreLeadRequest extends FormRequest
             'phone' => [
                 'string',
                 'required',
-                'min:11',
-                'max:11',
+                'min:10',
+                'max:10',
                 'unique:leads,phone,NULL,id,deleted_at,NULL',
             ],
             // 'national' => [
             //     'nullable',
-            //     'min:14',
-            //     'max:14',
+            //     'min:10',
+            //     'max:10',
             //     'unique:leads,phone,NULL,id,deleted_at,NULL',
             // ],
             // 'status_id' => [
@@ -46,10 +46,11 @@ class StoreLeadRequest extends FormRequest
             'gender' => [
                 'required',
             ],
-            // 'sales_by_id' => [
-            //     'required',
-            //     'integer',
-            // ],
+             'branch_id' => [
+                 'required',
+                 'integer',
+                 'exists:branches,id',
+             ],
         ];
     }
 }

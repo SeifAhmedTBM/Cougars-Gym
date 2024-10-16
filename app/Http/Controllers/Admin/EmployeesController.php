@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use Carbon\Carbon;
 use App\Models\Lead;
 use App\Models\Role;
@@ -28,6 +29,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
@@ -43,29 +45,37 @@ use Illuminate\Support\Facades\Auth;
 class EmployeesController extends Controller
 {
     use CsvImportTrait;
+    use MediaUploadingTrait;
 
     public function index(Request $request)
     {
+        
         abort_if(Gate::denies('employee_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $data = $request->except(['draw', 'columns', 'order', 'start', 'length', 'search', 'change_language', '_']);
 
 
-        $employees = Employee::all();
+        $employees = Employee::where('status' , 'active')->get();
         foreach ($employees as $employee) {
             $employee->finger_print_id = $employee->id;
             $employee->save();
         }
 
         $employee = Auth()->user()->employee;
-
+        if($request->status){
+            $status = $request->status ;
+        }
+        else{
+            $status = 'active';
+        }
         if ($request->ajax()) {
             if ($employee && $employee->branch_id != NULL) {
                 $query = Employee::index($data)->with(['user', 'branch'])
+                    ->where('status' , $status)
                     ->whereBranchId($employee->branch_id)
                     ->select(sprintf('%s.*', (new Employee())->table));
             } else {
-                $query = Employee::index($data)->with(['user', 'branch'])->select(sprintf('%s.*', (new Employee())->table));
+                $query = Employee::index($data)->where('status' , $status)->with(['user', 'branch'])->select(sprintf('%s.*', (new Employee())->table));
             }
 
             $table = Datatables::of($query);
@@ -87,6 +97,17 @@ class EmployeesController extends Controller
                     'row'
                 ));
             });
+            $table->editColumn('photo', function ($row) {
+                if ($photo = $row->photo) {
+                    return sprintf(
+                        '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
+                        $photo->url,
+                        $photo->thumbnail
+                    );
+                }
+
+                return '';
+            });
 
             $table->editColumn('id', function ($row) {
                 return $row->order ? $row->order : '';
@@ -96,6 +117,11 @@ class EmployeesController extends Controller
             });
 
             $table->editColumn('status', function ($row) {
+//                Trainer
+                if($row->user->roles[0]->title == 'Trainer'){
+                    return $row->status ? Employee::STATUS_SELECT[$row->status] . '<br> Mobile: '.($row->mobile_visibility ? 'Active' : 'inactive') : '';
+
+                }
                 return $row->status ? Employee::STATUS_SELECT[$row->status] : '';
             });
 
@@ -128,7 +154,7 @@ class EmployeesController extends Controller
                 return $row->created_at ? $row->created_at->toFormattedDateString() . ' , ' . $row->created_at->format('g:i A') : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'user', 'role', 'branch_name', 'employee_name']);
+            $table->rawColumns(['actions', 'placeholder', 'user', 'role', 'branch_name', 'employee_name','photo','status']);
 
             return $table->make(true);
         }
@@ -185,7 +211,7 @@ class EmployeesController extends Controller
 
         if (isset($request['attendance_check'])) {
             foreach ($request['days'] as $day) {
-                EmployeeSchedule::create([
+                $employee = EmployeeSchedule::create([
                     'employee_id'           => $employee->id,
                     'day'                   => $day,
                     'from'                  => $request['from'][$day] ?? '10:00',
@@ -194,6 +220,13 @@ class EmployeesController extends Controller
                     'flexible'              => $request['flexible'][$day] ?? 0,
                     'working_hours'         => $request['working_hours'][$day] ?? 8,
                 ]);
+                if ($request->input('photo', false)) {
+                    $employee->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+                }
+
+                if ($media = $request->input('ck-media', false)) {
+                    Media::whereIn('id', $media)->update(['model_id' => $employee->id]);
+                }
             }
         }
 
@@ -254,7 +287,16 @@ class EmployeesController extends Controller
         ]);
 
         $employee->update($request->except('from', 'to', 'days', 'user_id'));
-
+        if ($request->input('photo', false)) {
+            if (!$employee->photo || $request->input('photo') !== $employee->photo->file_name) {
+                if ($employee->photo) {
+                    $employee->photo->delete();
+                }
+                $employee->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
+            }
+        } elseif ($employee->photo) {
+            $employee->photo->delete();
+        }
         $this->sent_successfully();
         // return redirect()->back();
         return redirect()->route('admin.employees.index');
@@ -642,9 +684,9 @@ class EmployeesController extends Controller
 
     public function add_loan($id)
     {
-        $employee = Employee::findOrFail($id);
-
-        return view('admin.loans.add_loan', compact('employee'));
+        $employee = Employee::with('branch.accounts')->find($id);
+        $selected_branch = $employee->branch;
+        return view('admin.loans.add_loan', compact('selected_branch','employee'));
     }
 
     public function add_vacation($id)
@@ -680,7 +722,15 @@ class EmployeesController extends Controller
         return back();
     }
 
+    public function change_mobile_status($id)
+    {
+        $employee = Employee::findOrFail($id);
 
+        $employee->mobile_visibility = ! $employee->mobile_visibility;
+        $employee->save();
+        $this->sent_successfully();
+        return back();
+    }
     public function fixedComission($id)
     {
         $payroll = Payroll::find($id);

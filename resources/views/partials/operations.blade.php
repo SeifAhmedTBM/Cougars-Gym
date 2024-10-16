@@ -60,6 +60,15 @@
                     'linkUrl' => 'admin.membership-attendances.index',
                     'type' => '',
                 ],
+
+                [
+                    'can' => 'membership_attendance_access',
+                    'title' => 'Free Pt Requests',
+                    'imageUrl' => 'Attends-List.png',
+                    'linkUrl' => 'admin.free-requests.index',
+                    'type' => '',
+                ],
+
                 //
                 [
                     'can' => 'freeze_request_access',
@@ -111,12 +120,21 @@
                     'imageUrl' => '15.png',
                     'linkUrl' => 'admin.expenses.index',
                     'type' => '',
+                    
                 ],
                 [
                     'can' => 'member_access',
                     'title' => 'Member Suggestions',
                     'imageUrl' => '2.png',
                     'linkUrl' => 'admin.member-suggestion.index',
+                    'type' => '',
+                ],
+
+                [
+                    'can' => 'member_access',
+                    'title' => 'Paymob Transactions',
+                    'imageUrl' => 'Payments.png',
+                    'linkUrl' => 'admin.paymobTransactions.index',
                     'type' => '',
                 ],
             ],

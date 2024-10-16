@@ -160,8 +160,8 @@
                     $("#account_id").append(`<option value='${resp.id}'>${resp.name}</option>`)
                 })
 
-                $('#accounts_div').empty();
                 response.accounts.forEach(resp => {
+                    $('#accounts_div').empty();
                     $('#accounts_div').append(`
                         <input type="hidden" name="account_ids[]" value="${resp.id}">
                         <div class="col-md-3">

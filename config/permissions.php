@@ -34,6 +34,7 @@ return [
         'ID'                        => 1,
         'Create'                    => 'task_create',
         'Edit'                      => 'task_edit',
+        'All'                       => 'all_tasks_access',
         'Show'                      => 'task_show',
         'Delete'                    => 'task_delete',
         'Access'                    => 'task_access',
@@ -634,6 +635,11 @@ return [
         'Delete'                    => 'news_delete',
         'Access'                    => 'news_access',
     ],
+//    'Mobile Settings' => [
+//        'ID'                        => 8,
+//        'Edit'                      => 'mobile_settings',
+//
+//    ],
 
     // 'Service Options Pricelists' => [
     //     'Create' => 'service_options_pricelist_create',

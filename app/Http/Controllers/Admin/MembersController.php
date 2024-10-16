@@ -68,7 +68,7 @@ class MembersController extends Controller
         
         $settings = Setting::first();
 
-        $employee = Auth()->user()->employee;
+        $employee = Auth()->user()->employee ?? null;
 
         $user = Auth()->user();
 
@@ -92,7 +92,12 @@ class MembersController extends Controller
             //             ->select(sprintf('%s.*', (new Lead())->table));
             //     }
             // } else {
-                $query = Lead::index($data)
+                $query = $employee && $employee->branch_id ? Lead::index($data)
+                    ->with(['status', 'source', 'sales_by', 'address', 'created_by', 'branch'])
+                    ->whereType('member')
+                    ->whereBranchId($employee->branch_id)
+                    ->orderBy('member_code', 'desc')
+                    ->select(sprintf('%s.*', (new Lead())->table)):Lead::index($data)
                     ->with(['status', 'source', 'sales_by', 'address', 'created_by', 'branch'])
                     ->whereType('member')
                     ->orderBy('member_code', 'desc')
@@ -209,8 +214,7 @@ class MembersController extends Controller
 
             return $table->make(true);
         }
-
-        $branches = Branch::pluck('name', 'id');
+        $branches = $employee && $employee->branch_id ? Branch::where('id', $employee->branch_id)->pluck('name', 'id'):Branch::pluck('name', 'id');
 
         $statuses = Status::pluck('name', 'id');
 
@@ -218,9 +222,17 @@ class MembersController extends Controller
 
         $addresses = Address::pluck('name', 'id');
 
-        $sales = User::whereHas('roles', function ($q) {
+        $sales = $employee && $employee->branch_id ? User::whereHas('roles', function ($q) {
+            $q->where('title', 'Sales');
+        })->whereHas('employee', function ($q) use($employee) {
+                $q->whereHas('branch', function ($x) use($employee) {
+                    $x->where('id', $employee->branch_id); // Use where for a single value
+                });
+            })
+            ->pluck('name', 'id'):User::whereHas('roles', function ($q) {
             $q->where('title', 'Sales');
         })->pluck('name', 'id');
+
 
         if ($employee && $employee->branch_id != NULL) {
             if ($user->roles[0]->title == 'Sales') {
@@ -325,7 +337,7 @@ class MembersController extends Controller
             'email' => 'nullable|unique:users,email',
             // 'member_code'           => 'unique:leads,member_code',
             'phone' => 'required_unless:minor,yes|min:10|max:10|unique:leads,phone',
-            'national' => 'nullable|nullable|min:6|max:14|unique:leads,national',
+            'national' => 'nullable|nullable|min:10|max:10|unique:leads,national',
             'name' => 'required',
             'status_id' => 'required',
             'source_id' => 'required',
@@ -381,7 +393,7 @@ class MembersController extends Controller
                 'address_details'   => $request['address_details'],
                 'whatsapp_number'   => $request['whatsapp_number'],
                 'notes'             => $request['notes'],
-                'branch_id'         => $selected_branch->id ?? $request['branch_id'],
+                'branch_id'         => $selected_branch->id,
                 'created_by_id'     => Auth()->user()->id,
                 'parent_phone'      => isset($request->minor) ? $request['parent_phone'] : null,
                 'parent_details'    => isset($request->minor) ? $request['parent_details'] : null,
@@ -411,7 +423,7 @@ class MembersController extends Controller
                 'service_fee'           => $request->membership_fee,
                 'net_amount'            => $request->membership_fee - $request->discount_amount,
                 'membership_id'         => $membership->id,
-                'branch_id'             => $selected_branch->id ?? $request['branch_id'],
+                'branch_id'             => $selected_branch->id,
                 'sales_by_id'           => $request->sales_by_id,
                 'status'                => ($request->membership_fee - $request->discount_amount) == $request->received_amount ? 'fullpayment' : 'partial',
                 'created_by_id'         => Auth()->user()->id,
@@ -519,7 +531,7 @@ class MembersController extends Controller
 
             DB::commit();
         } catch (\Exception $e) {
-            dd($e->getMessage(),$e);
+            dd($e->getMessage());
             $this->something_wrong();
             return back();
         }
@@ -579,8 +591,8 @@ class MembersController extends Controller
     {
         $request->validate([
             "email" => "nullable|unique:users,email,$member->user_id",
-            "national" => "nullable|min:6|max:14|unique:leads,national,$member->id",
-            "phone" => "required_unless:minor,yes|min:10|max:11|unique:leads,phone,$member->id",
+            "national" => "nullable|min:10|max:10|unique:leads,national,$member->id",
+            "phone" => "required_unless:minor,yes|min:10|max:10|unique:leads,phone,$member->id",
             // 'member_code'       => "unique:leads,member_code,$member->member_code",
             'name' => 'required',
             'source_id' => 'required',
@@ -1046,8 +1058,8 @@ class MembersController extends Controller
 
         $request->validate([
             "email" => "nullable|unique:users,email,$member->user_id",
-            "national" => "nullable|min:6|max:14|unique:leads,national,$id",
-            "phone" => "required|min:10|max:11|unique:leads,phone,$id",
+            "national" => "nullable|min:10|max:10|unique:leads,national,$id",
+            "phone" => "required|min:10|max:10|unique:leads,phone,$id",
             'name' => 'required',
             // 'member_code'           => 'required|unique:leads,member_code',
             'status_id' => 'required',
