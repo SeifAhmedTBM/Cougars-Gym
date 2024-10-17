@@ -490,8 +490,6 @@ class AttendanceController extends Controller
                                         $freeze_request->update([
                                             'end_date'  => date('Y-m-d', strtotime($freeze_request->end_date. ' -' . $freeze_request_end_date->diffInDays($now) . ' Days')),
                                             'freeze'    => $freeze_request->freeze - $freeze_request_end_date->diffInDays($now),
-                                            'status'    => 'expired'
-
                                         ]);
                                         
                                     }else{
@@ -509,7 +507,6 @@ class AttendanceController extends Controller
                                         $freeze_request->update([
                                             'end_date'  => date('Y-m-d', strtotime($freeze_request->end_date. ' -' . $deducted_days . ' Days')),
                                             'freeze'    => ceil($consumed/7),
-                                            'status'    => 'expired'
                                         ]);
                                     }
                                 }
